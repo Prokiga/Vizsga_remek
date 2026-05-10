@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>
+        Színes Négy Évszak
+    </title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <style>
+        body {
+            background-color: rgb(57, 151, 189);
+        }
+
+        .designbox {
+            border: 3px solid chocolate;
+            border-radius: 1rem;
+            padding: 1rem;
+            background-color: lightcyan;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+
+<body>
+    <main class="container py-5">
+        <header class="text-center mb3">
+            <img src="images/Logo.png" alt="Logo" width="100" height="100">
+        </header>
+        <section class="card designbox mx-auto p-3">
+            <div class="card-header display-5 justify-content-center">
+                Színes Négy Évszak
+            </div>
+            <div class="card-body">
+                <div class="mb-3 mt-3">
+                    <label for="username" class="form-label">Felhasználónév:</label>
+                    <input type="username" class="form-control" id="username"
+                        placeholder="Add meg a felhasználó nevedet" name="username">
+                </div>
+                <div class="mb-3 mt-3">
+                    <label for="password" class="form-label">Jelszó:</label>
+                    <input type="password" class="form-control" id="padding" placeholder="Add meg a jelszavadat"
+                        name="password">
+                </div>
+                <div class="mx-auto">
+                    <a href="options.html" class="btn btn-primary">Bejelentkezés</a>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>
