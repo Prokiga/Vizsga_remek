@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Színes Négy Évszak - Beállítások</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm mb-4">
+        <div class="container">
+            <a class="navbar-brand" href="options.html" style="color: var(--primary-color); font-weight: bold;">&larr; Vissza a főmenübe</a>
+        </div>
+    </nav>
+
+    <main class="container mb-5">
+        <header class="text-center mb-4">
+            <h2 class="display-6" style="color: var(--secondary-color);">Beállítások (Adatbázis Kezelő)</h2>
+            <p class="text-muted">Itt tudod módosítani az alap készleteket és hozzáadni új rendeléseket.</p>
+        </header>
+
+        <div class="row g-4">
+            <!-- Új rendelés felvitele (Koszorú) -->
+            <div class="col-lg-6">
+                <section class="card designbox h-100">
+                    <div class="card-header text-center">
+                        Új koszorú rendelés felvitele
+                    </div>
+                    <div class="card-body">
+                        <form id="addWreathForm">
+                            <div class="mb-3">
+                                <label class="form-label">Vevő neve (Kinek):</label>
+                                <input type="text" id="wreathName" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Mikorra:</label>
+                                <input type="text" id="wreathDate" class="form-control" placeholder="pl. 11.04" required>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col">
+                                    <label class="form-label">Kicsi db:</label>
+                                    <input type="number" id="wreathSmall" class="form-control" min="0" value="0">
+                                </div>
+                                <div class="col">
+                                    <label class="form-label">Közép db:</label>
+                                    <input type="number" id="wreathMedium" class="form-control" min="0" value="0">
+                                </div>
+                                <div class="col">
+                                    <label class="form-label">Nagy db:</label>
+                                    <input type="number" id="wreathLarge" class="form-control" min="0" value="0">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Mentés az adatbázisba</button>
+                        </form>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Adatbázis visszaállítása gomb (Tanulási célból) -->
+            <div class="col-lg-6">
+                <section class="card designbox h-100" style="border-color: #e53e3e;">
+                    <div class="card-header text-center" style="color: #e53e3e;">
+                        Adatbázis Visszaállítása
+                    </div>
+                    <div class="card-body text-center d-flex flex-column justify-content-center">
+                        <p>Ha összekavarodtak az adatok, itt egy kattintással visszaállíthatod a beépített teszt adatokat.</p>
+                        <button id="resetDbBtn" class="btn btn-danger mt-3">Alapértelmezett adatok betöltése</button>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/api.js"></script>
+    <script src="js/index.js"></script>
+</body>
+</html>

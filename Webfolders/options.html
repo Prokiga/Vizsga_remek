@@ -1,123 +1,95 @@
 <!DOCTYPE html>
-<html>
+<html lang="hu">
 
 <head>
-    <title>
-        Színes Négy Évszak
-    </title>
+    <title>Színes Négy Évszak - Lehetőségek</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/bootstrap.min.css">
-
-    <style>
-        body {
-            background-color: rgb(57, 151, 189);
-        }
-
-        .designbox {
-            border: 3px solid chocolate;
-            border-radius: 1rem;
-            padding: 1rem;
-            background-color: lightcyan;
-            margin-top: 2rem;
-        }
-
-        .insidebox {
-            border: 1px solid chocolate;
-            border-radius: 1rem;
-            padding: 1rem;
-            background-color: lightyellow;
-            margin-top: 2rem;
-        }
-    </style>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
-    <main class="container mt-5">
-        <header class="text-center mb3">
-            <img src="images/Logo_img.png" alt="Logo" width="100" height="100">
-            <img src="images/Logo_text.png" alt="Színes Négy Évszak" height="100">
+    <!-- Navigációs sáv a kijelentkezéshez -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm mb-4">
+        <div class="container">
+            <a class="navbar-brand" href="options.html" style="color: var(--primary-color); font-weight: bold;">Főmenü</a>
+            <div class="d-flex">
+                <button id="logoutBtn" class="btn btn-outline-danger btn-sm">Kijelentkezés</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <header class="text-center mb-4">
+            <img src="images/Logo_img.png" alt="Logo" width="100" height="100" onerror="this.src='https://via.placeholder.com/100?text=Logo'">
+            <h2 class="display-6 mt-2" style="color: var(--primary-color);">Színes Négy Évszak</h2>
         </header>
+
         <section class="card designbox">
-            <div class="card-header display-6">
-                Lehetőségek:
+            <div class="card-header text-center">
+                Válassz a lehetőségek közül:
             </div>
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="card insidebox">
-                        <div class="card-body">
-                            <div class="card-header display-6">
-                                Fenyő bála
-                            </div>
-                            <table class="table text-center">
-                                <thead class="table-warning">
-                                    <tr>
-                                        <th></th>
-                                        <th>Lucfenyő</th>
-                                        <th>Jegyenye</th>
-                                        <th>Normand</th>
-                                        <th>Nobilis</th>
-                                    </tr>
-                                    <tr>
-                                        <td>Raktáron:</td>
-                                        <td>30</td>
-                                        <td>25</td>
-                                        <td>41</td>
-                                        <td>8</td>
-                                    </tr>
-                                </thead>
-                            </table>
+            
+            <div class="row g-4 mt-2">
+                <!-- 1. Fenyő bála és koszorú alap -->
+                <div class="col-lg-6 col-md-6">
+                    <div class="card insidebox d-flex flex-column">
+                        <div class="card-body text-center">
+                            <h3 class="card-title text-primary mb-3">Fenyőbála, koszorúalap</h3>
+                            <p class="text-muted">Jelenlegi készletek és állapotok megtekintése.</p>
                         </div>
-                        <div class="mt-auto p-3">
-                            <a href="Pinebase.html" class="btn btn-primary">Részletek</a>
+                        <div class="mt-auto text-center">
+                            <a href="Pinebase.html" class="btn btn-primary w-75">Megnyitás</a>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-lg-6">
-                    <div class="card insidebox">
-                        <div class="card-body">
-                            <div class="card-header display-6">
-                                Koszorú alap
-                            </div>
-                            <table class="table text-center">
-                                <thead class="table-warning">
-                                    <tr>
-                                        <th></th>
-                                        <th>Nagy</th>
-                                        <th>Kicsi</th>
-                                    </tr>
-                                    <tr>
-                                        <td>Folyamatban:</td>
-                                        <td>15</td>
-                                        <td>30</td>
-                                    </tr>
-                                </thead>
-                            </table>
+                <!-- 2. Rendelés felvétel -->
+                <div class="col-lg-6 col-md-6">
+                    <div class="card insidebox d-flex flex-column">
+                        <div class="card-body text-center">
+                            <h3 class="card-title text-primary mb-3">Rendelés felvétel</h3>
+                            <p class="text-muted">Vásárlói rendelések kezelése, teljesítések jelölése.</p>
                         </div>
-                        <div class="mt-auto p-3">
-                            <a href="#" class="btn btn-primary">Részletek</a>
+                        <div class="mt-auto text-center">
+                            <a href="flowerorder.html" class="btn btn-primary w-75">Megnyitás</a>
                         </div>
                     </div>
                 </div>
 
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="card insidebox">
-                        <div class="card-body">
-                            <div class="card-header display-6">
-                                Virág rendelés
-                            </div>
+                <!-- 3. Kiegészítők -->
+                <div class="col-lg-6 col-md-6">
+                    <div class="card insidebox d-flex flex-column">
+                        <div class="card-body text-center">
+                            <h3 class="card-title text-primary mb-3">Kiegészítők</h3>
+                            <p class="text-muted">Kiegészítő termékek listája és készlete.</p>
                         </div>
-                        <div class="mt-auto p-3">
-                            <a href="#" class="btn btn-primary">Részletek</a>
+                        <div class="mt-auto text-center">
+                            <a href="accessories.html" class="btn btn-primary w-75">Megnyitás</a>
                         </div>
                     </div>
                 </div>
+
+                <!-- 4. Beállítások (Új fül a virágosnak) -->
+                <div class="col-lg-6 col-md-6">
+                    <div class="card insidebox d-flex flex-column" style="border-color: var(--secondary-color);">
+                        <div class="card-body text-center">
+                            <h3 class="card-title mb-3" style="color: var(--secondary-color);">Beállítások</h3>
+                            <p class="text-muted">Adatbázis alap adatainak módosítása, új rendelések felvitele.</p>
+                        </div>
+                        <div class="mt-auto text-center">
+                            <a href="settings.html" class="btn w-75" style="background-color: var(--secondary-color); color: white;">Beállítások</a>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </section>
     </main>
+
+    <script src="js/api.js"></script>
+    <script src="js/index.js"></script>
 </body>
 
 </html>

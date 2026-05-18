@@ -3,48 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Színes Négy Évszak - Virág rendelés</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <title>Virág rendelés</title>
-
-    <style>
-        .demobox {
-            border: 5px double lightgrey;
-            border-radius: 1rem;
-            padding: 1rem;
-            background-color: antiquewhite;
-            margin: 1rem;
-            text-align: center;
-        }
-    </style>
-
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <h1 class="text-center">Virág rendelések</h1>
-    <section>
-        <div class="row g-4">
-            <div class="col-12 col-md-4">
-                <div class="card demobox" >
-                    <div class="card-body">
-                        <h2 class="card-title">Szántó Anita</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-4">
-                <div class="card demobox" >
-                    <div class="card-body">
-                        <h2 class="card-title">Moncsi Ózd</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-4">
-                <div class="card demobox">
-                    <div class="card-body">
-                        <h2 class="card-title">Extra Józsi</h2>
-                    </div>
-                </div>
-            </div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm mb-4">
+        <div class="container">
+            <a class="navbar-brand" href="options.html" style="color: var(--primary-color); font-weight: bold;">&larr; Vissza a főmenübe</a>
         </div>
-    </section>
+    </nav>
+
+    <main class="container mb-5">
+        <header class="text-center mb-4">
+            <h2 class="display-6" style="color: var(--primary-color);">Virág rendelések</h2>
+            <p class="text-muted">Kattints a vevő nevére a rendelések kibontásához.</p>
+        </header>
+
+        <section>
+            <!-- A JS ide fogja generálni a kártyákat az adatbázisból -->
+            <div class="row g-4 justify-content-center" id="ordersContainer">
+                <div class="col-12 text-center">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Betöltés...</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
     
+    <script src="js/api.js"></script>
+    <script src="js/index.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            loadCustomerOrders();
+        });
+    </script>
 </body>
 </html>
