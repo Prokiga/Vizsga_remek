@@ -36,6 +36,31 @@ if (loginForm) {
 }
 
 // --------------------------------------------------------------------------
+// 1. REGISZTRÁCIÓ OLDAL (index.html)
+// --------------------------------------------------------------------------
+const loginForm = document.getElementById('loginForm');
+if (loginForm) {
+    loginForm.addEventListener('registry', function(event) {
+        // Megakadályozzuk, hogy az oldal újratöltődjön
+        event.preventDefault();
+
+        // Kiolvassuk a beírt adatokat
+        var user = document.getElementById('username').value;
+        var pass = document.getElementById('password').value;
+
+        // Itt kellene elmenteni az új adatokat az adatbázisba
+        /*if (user === "admin" && pass === "1234") {
+            // Ha jó, átirányítjuk a főmenübe
+            window.location.href = "options.html";
+        } else {
+            // Ha rossz, megmutatjuk a hibaüzenetet (levesszük a d-none osztályt)
+            document.getElementById('loginError').classList.remove('d-none');
+        }
+    });
+}*/
+
+
+// --------------------------------------------------------------------------
 // 2. FENYŐBÁLA ÉS KOSZORÚALAP OLDAL (Pinebase.html)
 // --------------------------------------------------------------------------
 
