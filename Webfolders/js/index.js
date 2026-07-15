@@ -27,7 +27,7 @@ if (loginForm) {
         // Egy egyszerű (amatőr de vizsgára jó) ellenőrzés
         if (user === "admin" && pass === "1234") {
             // Ha jó, átirányítjuk a főmenübe
-            window.location.href = "options.html";
+            window.location.href = "Pinebase.html";
         } else {
             // Ha rossz, megmutatjuk a hibaüzenetet (levesszük a d-none osztályt)
             document.getElementById('loginError').classList.remove('d-none');

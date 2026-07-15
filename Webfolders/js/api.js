@@ -25,37 +25,11 @@ const defaultPineData = [
 ];
 
 const defaultWreathData = [
-    { id: 1, name: "Kósa P", date: "11.14", small: 10, medium: 0, large: 0, done: false },
-    { id: 2, name: "Anita", date: "11.06", small: 2, medium: 2, large: 0, done: true },
-    { id: 3, name: "Zsuzsi", date: "11.07", small: 0, medium: 10, large: 0, done: true },
-    { id: 4, name: "Kocsisné", date: "11.10", small: 8, medium: 0, large: 0, done: false },
-    { id: 5, name: "Tündike", date: "11.07", small: 0, medium: 1, large: 0, done: true }
-];
-
-const defaultFlowerOrders = [
-    {
-        id: 1,
-        customerName: "Szántó Anita",
-        items: [
-            { itemId: 101, name: "Nagy koszorú (Piros)", completed: false },
-            { itemId: 102, name: "Kis asztaldísz", completed: false }
-        ]
-    },
-    {
-        id: 2,
-        customerName: "Moncsi Ózd",
-        items: [
-            { itemId: 201, name: "Sírcsokor (Fehér)", completed: true },
-            { itemId: 202, name: "Közepes koszorú", completed: false }
-        ]
-    },
-    {
-        id: 3,
-        customerName: "Extra Józsi",
-        items: [
-            { itemId: 301, name: "Extra nagy fenyőbála", completed: false }
-        ]
-    }
+    { id: 1, name: "Kósa P", date: "11.14", small: 10, done: true, large: 0, done: false },
+    { id: 2, name: "Anita", date: "11.06", small: 2, done: false, large: 0, done: true },
+    { id: 3, name: "Zsuzsi", date: "11.07", small: 0, done: true, large: 0, done: true },
+    { id: 4, name: "Kocsisné", date: "11.10", small: 8, done: true, large: 0, done: false },
+    { id: 5, name: "Tündike", date: "11.07", small: 0, done: false, large: 0, done: true }
 ];
 
 // --- ADATBÁZIS FÜGGVÉNYEK (Local Storage szimuláció) ---
@@ -91,18 +65,8 @@ function apiAddWreathData(newOrder) {
     localStorage.setItem('wreathData', JSON.stringify(data));
 }
 
-// 3. Virág rendelések lekérése
-function apiGetFlowerOrders() {
-    let data = localStorage.getItem('flowerOrders');
-    if (!data) {
-        localStorage.setItem('flowerOrders', JSON.stringify(defaultFlowerOrders));
-        data = localStorage.getItem('flowerOrders');
-    }
-    return JSON.parse(data);
-}
-
 // Tétel állapotának (pipa) frissítése
-function apiToggleOrderItem(customerId, itemId, isCompleted) {
+/*function apiToggleOrderItem(customerId, itemId, isCompleted) {
     let orders = apiGetFlowerOrders();
     // Végigmegyünk a rendeléseken
     for (let i = 0; i < orders.length; i++) {
@@ -117,7 +81,7 @@ function apiToggleOrderItem(customerId, itemId, isCompleted) {
     }
     // Elmentjük a módosított tömböt
     localStorage.setItem('flowerOrders', JSON.stringify(orders));
-}
+}*/
 
 // Segéd függvény a reseteléshez
 function apiResetDatabase() {
