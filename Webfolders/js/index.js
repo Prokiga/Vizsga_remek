@@ -38,7 +38,7 @@ if (loginForm) {
 // --------------------------------------------------------------------------
 // 1. REGISZTRÁCIÓ OLDAL (index.html)
 // --------------------------------------------------------------------------
-const loginForm = document.getElementById('loginForm');
+/*const loginForm = document.getElementById('loginForm');
 if (loginForm) {
     loginForm.addEventListener('registry', function(event) {
         // Megakadályozzuk, hogy az oldal újratöltődjön
@@ -49,7 +49,7 @@ if (loginForm) {
         var pass = document.getElementById('password').value;
 
         // Itt kellene elmenteni az új adatokat az adatbázisba
-        /*if (user === "admin" && pass === "1234") {
+        if (user === "admin" && pass === "1234") {
             // Ha jó, átirányítjuk a főmenübe
             window.location.href = "options.html";
         } else {
