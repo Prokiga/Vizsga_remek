@@ -66,7 +66,7 @@ function apiAddWreathData(newOrder) {
 }
 
 // Tétel állapotának (pipa) frissítése
-/*function apiToggleOrderItem(customerId, itemId, isCompleted) {
+function apiToggleOrderItem(customerId, itemId, isCompleted) {
     let orders = apiGetFlowerOrders();
     // Végigmegyünk a rendeléseken
     for (let i = 0; i < orders.length; i++) {
@@ -81,7 +81,7 @@ function apiAddWreathData(newOrder) {
     }
     // Elmentjük a módosított tömböt
     localStorage.setItem('flowerOrders', JSON.stringify(orders));
-}*/
+}
 
 // Segéd függvény a reseteléshez
 function apiResetDatabase() {
