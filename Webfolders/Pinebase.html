@@ -25,18 +25,16 @@
         </header>
 
         <!-- FENYŐBÁLA SZEKCIÓ -->
-        <div class="container-fluid">
+        <div class="container-fluid mb-3">
             <div class="row g-3">
-
                 <!-- 1/3 szélesség -->
                 <div class="col-lg-4">
                     <section class="card designbox h-100">
                         <div class="card-header text-center">
                             Fenyőbála rendelés
                         </div>
-
                         <div class="card-body overflow-auto">
-                            <!-- Ide kerül a második táblázat -->
+                            <!-- Ide kerül az első táblázat -->
                             <table class="table table-hover text-center align-middle">
                                 <thead class="table-primary">
                                     <tr>
@@ -61,12 +59,11 @@
                                             <label for="treeState">Állapot</label>
                                             <select id="treeState" name="treeState">
                                                 <option value="">-- Válassz --</option>
-                                                <option value="luc">Érkezett</option>
-                                                <option value="jegenye">Elvitt</option>
-                                                <option value="normand">Eladva</option>
-                                                <option value="nobilis">Lekötve</option>
-                                                <option value="nobilis">Eltéve</option>
-                                                <option value="nobilis">Maradt</option>
+                                                <option value="Arrived">Érkezett</option>
+                                                <option value="Taken">Elvitt</option>
+                                                <option value="Sold">Eladva</option>
+                                                <option value="Used">Lekötve</option>
+                                                <option value="Saved">Eltéve</option>
                                             </select>
                                         </td>
                                     </tr>
@@ -86,14 +83,12 @@
                         </div>
                     </section>
                 </div>
-
                 <!-- 2/3 szélesség -->
                 <div class="col-lg-8">
                     <section class="card designbox h-100">
                         <div class="card-header text-center">
                             Fenyő bála készlet
                         </div>
-
                         <div class="card-body overflow-auto">
                             <table class="table table-hover text-center align-middle">
                                 <thead class="table-primary">
@@ -115,36 +110,102 @@
                         </div>
                     </section>
                 </div>
-
             </div>
         </div>
         <!-- KOSZORÚALAP SZEKCIÓ -->
-        <section class="card designbox mx-auto">
-            <div class="card-header text-center"
-                style="color: var(--secondary-color); border-color: var(--secondary-color);">
-                Koszorú alap rendelések
+        <div class="container-fluid mb-5">
+            <div class="row g-3">
+                <!-- 1/3 szélesség -->
+                <div class="col-lg-4">
+                    <section class="card designbox h-100">
+                        <div class="card-header text-center">
+                            Koszorúalap rendelés
+                        </div>
+                        <div class="card-body overflow-auto">
+                            <!-- Ide kerül az első táblázat -->
+                            <table class="table table-hover text-center align-middle">
+                                <thead class="table-primary">
+                                    <tr>
+                                        <th>Új rendelés hozzáadása:</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <label for="Costumer">Vásárló</label>
+                                            <select id="Costumer" name="Vevő">
+                                                <option value="">-- Válassz --</option>
+                                                <option value="">Kriszta</option>
+                                                <option value="">Géza</option>
+                                                <option value="">István</option>
+                                                
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label for="baseType">Alap típusa:</label>
+                                            <select id="baseType" name="Fenyőtípus">
+                                                <option value="">-- Válassz --</option>
+                                                <option value="Small">Kicsi</option>
+                                                <option value="Big">Nagy</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label for="deadline">Határidő</label>
+                                            <input type="date" name="Határidő">
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label>Add meg a darabszámot:</label>
+                                            <input type="text" name="darabszám">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <button class="btn-primary">Mentés</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+                </div>
+                <!--2/3-ad rész -->
+                <div class="col-lg-8">
+                    <section class="card designbox h-100">
+                        <div class="card-header text-center">
+                            Koszorúalap készlet
+                        </div>
+                        <div class="card-body overflow-auto">
+                            <table class="table table-hover text-center align-middle">
+                                <thead class="table-warning">
+                                    <tr>
+                                        <th>Kinek</th>
+                                        <th>Mikorra</th>
+                                        <th>Kicsi</th>
+                                        <th>Kész (pipa)</th>
+                                        <th>Nagy</th>
+                                        <th>Kész (pipa)</th>
+                                    </tr>
+                                </thead>
+                                <!-- Az id="wreathTableBody" segítségével a JS ide fogja betölteni az adatokat -->
+                                <tbody id="wreathTableBody">
+                                    <tr>
+                                        <td colspan="6">Adatok betöltése folyamatban...</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+                </div>
             </div>
-            <div class="card-body overflow-auto">
-                <table class="table table-hover text-center align-middle">
-                    <thead class="table-warning">
-                        <tr>
-                            <th>Kinek</th>
-                            <th>Mikorra</th>
-                            <th>Kicsi</th>
-                            <th>Kész (pipa)</th>
-                            <th>Nagy</th>
-                            <th>Kész (pipa)</th>
-                        </tr>
-                    </thead>
-                    <!-- Az id="wreathTableBody" segítségével a JS ide fogja betölteni az adatokat -->
-                    <tbody id="wreathTableBody">
-                        <tr>
-                            <td colspan="6">Adatok betöltése folyamatban...</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
+        </div>
+        </div>
     </main>
 
     <script src="js/api.js"></script>

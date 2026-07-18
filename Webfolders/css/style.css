@@ -37,6 +37,8 @@ header img {
     padding: 2rem;
     box-shadow: var(--shadow);
     margin-top: 2rem;
+    
+
 }
 
 .designbox .card-header {
@@ -48,31 +50,6 @@ header img {
     margin-bottom: 1rem;
 }
 
-/* Belső kártyák stílusa (pl. menüpontok) */
-.insidebox {
-    background-color: var(--card-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 1rem;
-    padding: 1.5rem;
-    margin-top: 1.5rem;
-    height: 100%;
-    box-shadow: var(--shadow);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-/* Hover (rámutatás) effektus a belső kártyákon */
-.insidebox:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--hover-shadow);
-}
-
-.insidebox .card-header {
-    background-color: transparent;
-    border-bottom: none;
-    color: var(--primary-color);
-    font-size: 1.5rem;
-    font-weight: 500;
-}
 
 /* Modern gombok stílusa */
 .btn-primary {
@@ -110,26 +87,6 @@ header img {
     border-bottom: 2px solid var(--border-color);
 }
 
-/* Lenyitható kártyák (Rendeléseknél) */
-.demobox {
-    border: none;
-    border-radius: 1rem;
-    background-color: var(--card-bg);
-    box-shadow: var(--shadow);
-    margin-bottom: 1rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.demobox:hover {
-    transform: scale(1.02);
-}
-
-.demobox .card-title {
-    color: var(--primary-color);
-    margin: 0;
-}
-
 /* Rejtett tartalmak osztálya */
 .d-none {
     display: none !important;
@@ -147,10 +104,4 @@ header img {
     font-size: 1.2rem;
     margin-left: 0.5rem;
     cursor: pointer;
-}
-
-/* Kihúzott (teljesített) tétel stílusa */
-.completed-item {
-    text-decoration: line-through;
-    color: #a0aec0;
 }
