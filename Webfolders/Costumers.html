@@ -20,7 +20,7 @@
 
     <main class="container mb-5">
         <header class="text-center mb-4">
-            <h2 class="display-6" style="color: var(--primary-color);">Koszorúalap készletnyilvántartás</h2>
+            <h2 class="display-6" style="color: var(--primary-color);">Vásárlók</h2>
             <p class="text-muted">Az adatok az adatbázisból töltődnek be (jelenleg csak szimulálva a böngészőben).</p>
         </header>
         <!-- KOSZORÚALAP SZEKCIÓ -->
@@ -30,50 +30,52 @@
                 <div class="col-lg-4">
                     <section class="card designbox h-100">
                         <div class="card-header text-center">
-                            <h2 class="display-6" style="color:  var(--primary-color);">Új rendelés</h2>
+                            <h2 class="display-6" style="color:  var(--primary-color);">Új vásárló</h2>
                         </div>
                         <div class="card-body overflow-auto">
                             <!-- Ide kerül az első táblázat -->
                             <table class="table table-hover text-center align-middle">
                                 <thead class="table-primary">
                                     <tr>
-                                        <th>Új rendelés hozzáadása:</th>
+                                        <th>Új vásárló hozzáadása:</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <td>
-                                            <label for="Costumer">Vásárló</label>
-                                            <select id="Costumer" name="Vevő">
-                                                <option value="">-- Válassz --</option>
-                                                <option value="">Kriszta</option>
-                                                <option value="">Géza</option>
-                                                <option value="">István</option>
-
-                                            </select>
+                                            <label for="costumer_name">Név:</label>
+                                            <input type="text" name="A vevő neve">
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <label for="baseType">Alap típusa:</label>
-                                            <select id="baseType" name="Fenyőtípus">
-                                                <option value="">-- Válassz --</option>
-                                                <option value="Small">Kicsi</option>
-                                                <option value="Big">Nagy</option>
-                                            </select>
+                                            <label for="costumer_taxnumber">Adószám:</label>
+                                            <input type="text" name="A vevő adószám">
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <label for="deadline">Határidő</label>
-                                            <input type="date" name="Határidő">
+                                            <label for="costumer_postal_code">Ir.szám:</label>
+                                            <input type="text" name="Irányítószám">
 
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <label>Add meg a darabszámot:</label>
-                                            <input type="text" name="darabszám">
+                                            <label for="costumer_city">Város:</label>
+                                            <input type="text" name="Város">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label for="costumer_address">Cím:</label>
+                                            <input type="text" name="Cím">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label for="costumer_email">E-mail cím:</label>
+                                            <input type="email" name="E-mail">
                                         </td>
                                     </tr>
                                     <tr>
@@ -90,22 +92,22 @@
                 <div class="col-lg-8">
                     <section class="card designbox h-100">
                         <div class="card-header text-center">
-                           <h2 class="display-6" style="color:  var(--primary-color);">Raktári adatok</h2>
+                            <h2 class="display-6" style="color:  var(--primary-color);">Regisztrált Vásárlók adatai</h2>
                         </div>
                         <div class="card-body overflow-auto">
                             <table class="table table-hover text-center align-middle">
                                 <thead class="table-warning">
                                     <tr>
-                                        <th>Kinek</th>
-                                        <th>Mikorra</th>
-                                        <th>Kicsi</th>
-                                        <th>Kész (pipa)</th>
-                                        <th>Nagy</th>
-                                        <th>Kész (pipa)</th>
+                                        <th>Név</th>
+                                        <th>Irányítószám</th>
+                                        <th>Város</th>
+                                        <th>Cím</th>
+                                        <th>E-mail cím</th>
+                                        <th>Adószám</th>
                                     </tr>
                                 </thead>
                                 <!-- Az id="wreathTableBody" segítségével a JS ide fogja betölteni az adatokat -->
-                                <tbody id="wreathTableBody">
+                                <tbody id="costumersTableBody">
                                     <tr>
                                         <td colspan="6">Adatok betöltése folyamatban...</td>
                                     </tr>
@@ -122,7 +124,7 @@
     <script>
         // Amikor betölt az oldal, azonnal hívjuk meg a táblázat rajzoló funkciókat
         document.addEventListener('DOMContentLoaded', () => {
-            loadWreathData();
+            loadCostumersData();
         });
     </script>
 </body>

@@ -32,6 +32,14 @@ const defaultWreathData = [
     { id: 5, name: "Tündike", date: "11.07", small: 0, done: false, large: 0, done: true }
 ];
 
+const defaultCostumersData = [
+    { id: 1, name: "Kósa P", date: "11.14", small: 10, done: true, large: 0, done: false },
+    { id: 2, name: "Anita", date: "11.06", small: 2, done: false, large: 0, done: true },
+    { id: 3, name: "Zsuzsi", date: "11.07", small: 0, done: true, large: 0, done: true },
+    { id: 4, name: "Kocsisné", date: "11.10", small: 8, done: true, large: 0, done: false },
+    { id: 5, name: "Tündike", date: "11.07", small: 0, done: false, large: 0, done: true }
+];
+
 // --- ADATBÁZIS FÜGGVÉNYEK (Local Storage szimuláció) ---
 
 // 1. Fenyőbála adatok lekérése
@@ -55,32 +63,14 @@ function apiGetWreathData() {
     return JSON.parse(data);
 }
 
-// Új koszorú rendelés hozzáadása
-function apiAddWreathData(newOrder) {
-    let data = apiGetWreathData();
-    // Generálunk egy egyedi azonosítót (ID-t)
-    newOrder.id = Date.now();
-    newOrder.done = false;
-    data.push(newOrder);
-    localStorage.setItem('wreathData', JSON.stringify(data));
-}
-
-// Tétel állapotának (pipa) frissítése
-function apiToggleOrderItem(customerId, itemId, isCompleted) {
-    let orders = apiGetFlowerOrders();
-    // Végigmegyünk a rendeléseken
-    for (let i = 0; i < orders.length; i++) {
-        if (orders[i].id === customerId) {
-            // Megtaláltuk a vevőt, most végigmegyünk a tételein
-            for (let j = 0; j < orders[i].items.length; j++) {
-                if (orders[i].items[j].itemId === itemId) {
-                    orders[i].items[j].completed = isCompleted;
-                }
-            }
-        }
+// 3. Vevői adatok lekérése
+function apiGetCostumersData() {
+    let data = localStorage.getItem('CostumersData');
+    if (!data) {
+        localStorage.setItem('CostumersData', JSON.stringify(defaultCostumersData));
+        data = localStorage.getItem('CostumersData');
     }
-    // Elmentjük a módosított tömböt
-    localStorage.setItem('flowerOrders', JSON.stringify(orders));
+    return JSON.parse(data);
 }
 
 // Segéd függvény a reseteléshez
