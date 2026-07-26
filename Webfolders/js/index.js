@@ -91,6 +91,36 @@ function loadPineData() {
     }
 }
 
+
+// Ezt a függvényt a Costumers.html hívja meg a betöltéskor
+function loadCostumersData() {
+    const tableBody = document.getElementById('CostumersTableBody');
+    if (!tableBody) return; // Ha nem ezen az oldalon vagyunk, kilépünk
+
+    // Elkérjük az adatokat a szimulált adatbázisból (később majd a valódi MySQL-ből)
+    const CostumersData = apiGetCostumersData();
+    
+    // Töröljük a "Betöltés..." szöveget
+    tableBody.innerHTML = "";
+
+    // Végigmegyünk a tömbön, és minden sornál generálunk egy HTML <tr> sort
+    for (let i = 0; i < CostumersData.length; i++) {
+        const row = CostumersData[i];
+        const htmlSor = `
+            <tr>
+                <th class="text-start">${row.type}</th>
+                <td>${row.luc}</td>
+                <td>${row.jegenye}</td>
+                <td>${row.normand}</td>
+                <td>${row.nobilis}</td>
+            </tr>
+        `;
+        tableBody.innerHTML += htmlSor;
+    }
+}
+
+
+
 function loadWreathData() {
     const tableBody = document.getElementById('wreathTableBody');
     if (!tableBody) return;
