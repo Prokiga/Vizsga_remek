@@ -13,7 +13,7 @@
     <!-- Navigáció a Vissza gombhoz -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm mb-4">
         <div class="container">
-            <a class="navbar-brand" href="options.html" style="color: var(--primary-color); font-weight: bold;">&larr;
+            <a class="navbar-brand" href="Options.html" style="color: var(--primary-color); font-weight: bold;">&larr;
                 Vissza a főmenübe</a>
         </div>
     </nav>
@@ -37,50 +37,62 @@
                             <table class="table table-hover text-center align-middle">
                                 <thead class="table-primary">
                                     <tr>
-                                        <th>Új vásárló hozzáadása:</th>
+                                        <th colspan="2">Új vásárló hozzáadása:</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <td>
-                                            <label for="costumer_name">Név:</label>
-                                            <input type="text" name="A vevő neve">
+                                            <label class="new-order-label" for="costumer_name">Név:</label>
+                                        </td>
+                                        <td>
+                                            <input class="form-control" type="text" name="A vevő neve">
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <label for="costumer_taxnumber">Adószám:</label>
-                                            <input type="text" name="A vevő adószám">
+                                            <label class="new-order-label" for="costumer_taxnumber">Adószám:</label>
+                                        </td>
+                                        <td>
+                                            <input class="form-control" type="text" name="A vevő adószám">
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <label for="costumer_postal_code">Ir.szám:</label>
-                                            <input type="text" name="Irányítószám">
+                                            <label class="new-order-label" for="costumer_postal_code">Irányítószám:</label>
+                                        </td>
+                                        <td>
+                                            <input class="form-control" type="text" name="Irányítószám">
 
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <label for="costumer_city">Város:</label>
-                                            <input type="text" name="Város">
+                                            <label class="new-order-label" for="costumer_city">Város:</label>
+                                        </td>
+                                        <td>
+                                            <input class="form-control" type="text" name="Város">
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <label for="costumer_address">Cím:</label>
-                                            <input type="text" name="Cím">
+                                            <label class="new-order-label" for="costumer_address">Cím:</label>
+                                        </td>
+                                        <td>
+                                            <input class="form-control" type="text" name="Cím">
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <label for="costumer_email">E-mail cím:</label>
-                                            <input type="email" name="E-mail">
+                                            <label class="new-order-label" for="costumer_email">E-mail cím:</label>
+                                        </td>
+                                        <td>
+                                            <input class="form-control" type="email" name="E-mail">
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>
-                                            <button class="btn-primary">Mentés</button>
+                                        <td colspan="2">
+                                            <button class="btn btn-primary w-75">Mentés</button>
                                         </td>
                                     </tr>
                                 </tbody>

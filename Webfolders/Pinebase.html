@@ -13,7 +13,7 @@
     <!-- Navigáció a Vissza gombhoz -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm mb-4">
         <div class="container">
-            <a class="navbar-brand" href="options.html" style="color: var(--primary-color); font-weight: bold;">&larr;
+            <a class="navbar-brand" href="Options.html" style="color: var(--primary-color); font-weight: bold;">&larr;
                 Vissza a főmenübe</a>
         </div>
     </nav>
@@ -37,14 +37,16 @@
                             <table class="table table-hover text-center align-middle">
                                 <thead class="table-primary">
                                     <tr>
-                                        <th>Új rendelés hozzáadása:</th>
+                                        <th colspan="2">Új rendelés hozzáadása:</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <td>
-                                            <label for="Costumer">Vásárló</label>
-                                            <select id="Costumer" name="Vevő">
+                                            <label class="new-order-label" for="Costumer">Vásárló</label>
+                                        </td>
+                                        <td>
+                                            <select class="form-control" id="Costumer" name="Vevő">
                                                 <option value="">-- Válassz --</option>
                                                 <option value="">Kriszta</option>
                                                 <option value="">Géza</option>
@@ -55,8 +57,10 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <label for="baseType">Alap típusa:</label>
-                                            <select id="baseType" name="Fenyőtípus">
+                                            <label class="new-order-label" for="baseType">Alap típus:</label>
+                                        </td>
+                                        <td>
+                                            <select class="form-control" id="baseType" name="Fenyőtípus">
                                                 <option value="">-- Válassz --</option>
                                                 <option value="Small">Kicsi</option>
                                                 <option value="Big">Nagy</option>
@@ -65,20 +69,23 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <label for="deadline">Határidő</label>
-                                            <input type="date" name="Határidő">
-
+                                            <label class="new-order-label" for="deadline">Határidő</label>
+                                        </td>
+                                        <td>
+                                            <input class="form-control" type="date" name="Határidő">
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <label>Add meg a darabszámot:</label>
-                                            <input type="text" name="darabszám">
+                                            <label class="new-order-label" for="number_of_pieces">Darabszám:</label>
+                                        </td>
+                                        <td>
+                                            <input class="form-control" type="text" name="darabszám">
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>
-                                            <button class="btn-primary">Mentés</button>
+                                        <td colspan="2">
+                                            <button class="btn btn-primary w-75">Mentés</button>
                                         </td>
                                     </tr>
                                 </tbody>
