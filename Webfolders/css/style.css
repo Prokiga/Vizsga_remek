@@ -50,6 +50,31 @@ header img {
     margin-bottom: 1rem;
 }
 
+/* Belső kártyák stílusa (pl. menüpontok) */
+.insidebox {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    margin-top: 1rem;
+    height: 100%;
+    box-shadow: var(--shadow);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Hover (rámutatás) effektus a belső kártyákon */
+.insidebox:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--hover-shadow);
+}
+
+.insidebox .card-header {
+    background-color: transparent;
+    border-bottom: none;
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    font-weight: 500;
+}
 
 /* Modern gombok stílusa */
 .btn-primary {
@@ -100,14 +125,9 @@ header img {
     cursor: pointer;
 }
 
-.form-check-label {
-    font-size: 1.2rem;
-    margin-left: 0.5rem;
-    cursor: pointer;
-}
-
+/*  */
 .new-order-label {
     font-size: 1rem;
     font-weight: bold;
-    cursor: pointer;
+    cursor: text;
 }
