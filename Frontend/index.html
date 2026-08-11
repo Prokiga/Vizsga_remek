@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="hu">
+
+<head>
+    <title>Színes Négy Évszak - Bejelentkezés</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- Az új, modern stíluslapunk bekötése -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <main class="container py-5">
+        <header class="text-center mb-4">
+            <img src="images/Logo_img.png" alt="Logo" width="120" height="120" onerror="this.src='https://via.placeholder.com/120?text=Logo'">
+            <!-- Az onerror csak biztosíték, ha a kép nem töltődne be -->
+            <br>
+            <h1 class="display-5 mt-3" style="color: var(--primary-color); font-weight: bold;">Színes Négy Évszak</h1>
+        </header>
+
+        <section class="card designbox mx-auto" style="max-width: 400px;">
+            <div class="card-header display-6 text-center">
+                Bejelentkezés
+            </div>
+            <div class="card-body">
+                <!-- A form id-t kapott, hogy a JS tudja kezelni -->
+                <form id="loginForm">
+                    <div class="mb-3 mt-3">
+                        <label for="username" class="form-label">Felhasználónév:</label>
+                        <input type="text" class="form-control" id="username" placeholder="Add meg a felhasználó nevedet" name="username" required>
+                    </div>
+                    <div class="mb-4 mt-3">
+                        <label for="password" class="form-label">Jelszó:</label>
+                        <input type="password" class="form-control" id="password" placeholder="Add meg a jelszavadat" name="password" required>
+                    </div>
+                    <div class="d-grid gap-2">
+                        <!-- Type=submit, hogy a form küldést a JS el tudja kapni (preventDefault) -->
+                        <button type="submit" class="btn btn-primary btn-lg">Bejelentkezés</button>
+                    </div>
+                    <div class="d-grid gap-2">
+                        <!-- Type=submit, hogy a form küldést a JS el tudja kapni (preventDefault) -->
+                        <button type="registry" class="btn btn-link btn-lg">Regisztráció</button>
+                    </div>
+                    <!-- Ide írjuk ki a hibaüzenetet, ha rossz a jelszó -->
+                    <div id="loginError" class="text-danger mt-3 text-center d-none">
+                        Hibás felhasználónév vagy jelszó!
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- A logika bekötése a fájl legvégén, hogy a HTML betöltődjön előtte -->
+    <script src="js/api.js"></script>
+    <script src="js/index.js"></script>
+</body>
+
+</html>

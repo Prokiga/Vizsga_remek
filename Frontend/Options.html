@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <title>Színes Négy Évszak - Lehetőségek</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+    <!-- Navigáció a Vissza gombhoz -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm mb-4">
+        <div class="container">
+            <a class="navbar-brand" href="index.html" style="color: var(--primary-color); font-weight: bold;">
+                Kilépés
+            </a>
+        </div>
+    </nav>
+
+    <main class="container">
+        <header class="text-center mb-4">
+            <img src="images/Logo_img.png" alt="Logo" width="100" height="100" onerror="this.src='https://via.placeholder.com/100?text=Logo'">
+            <h2 class="display-6 mt-2" style="color: var(--primary-color);">Színes Négy Évszak</h2>
+        </header>
+
+        <section class="card designbox">
+            <div class="card-header text-center">
+                <h2 class=" text-primary mb-3">Válassz a lehetőségek közül:</h2>
+            </div>
+            
+            <div class="row g-4 mt-3">
+                <!-- 1. Fenyő bála -->
+                <div class="col-lg-4 col-mt-4">
+                    <div class="card insidebox d-flex flex-column card h-100">
+                        <div class="card-body text-center">
+                            <h3 class="card-title text-primary mt-3">Fenyőbála</h3>
+                            <p class="text-muted">Készletek megjelenítése és új rendelés felvétele.</p>
+                        </div>
+                        <div class="mt-auto text-center">
+                            <a href="PineBatch.html" class="btn btn-primary w-75">Megnyitás</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Koszorúalap --> 
+                <div class="col-lg-4 col-mt-4">
+                    <div class="card insidebox d-flex flex-column card h-100">
+                        <div class="card-body text-center">
+                            <h3 class="card-title text-primary mt-3">Koszorúalap</h3>
+                            <p class="text-muted">Készletek megjelenítése és új rendelés felvétele.</p>
+                        </div>
+                        <div class="mt-auto text-center">
+                            <a href="PineBase.html" class="btn btn-primary w-75">Megnyitás</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Vásárlók -->
+                <div class="col-lg-4 col-mt-4">
+                    <div class="card insidebox d-flex flex-column card h-100">
+                        <div class="card-body text-center">
+                            <h3 class="card-title text-primary mt-3">Vásárlók</h3>
+                            <p class="text-muted">Vásárlók megjelenítése és új vásárló felvitele.</p>
+                        </div>
+                        <div class="mt-auto text-center">
+                            <a href="Costumers.html" class="btn btn-primary w-75">Megnyitás</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/api.js"></script>
+    <script src="js/index.js"></script>
+</body>
+
+</html>

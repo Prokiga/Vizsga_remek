@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <title>Színes Négy Évszak - Fenyőbála és Koszorúalap</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <!-- Navigáció a Vissza gombhoz -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm mb-4">
+        <div class="container">
+            <a class="navbar-brand" href="Options.html" style="color: var(--primary-color); font-weight: bold;">&larr;
+                Vissza a főmenübe</a>
+        </div>
+    </nav>
+
+    <main class="container mb-5">
+        <header class="text-center mb-4">
+            <h2 class="display-6" style="color: var(--primary-color);">Fenyőbála készletnyilvántartás</h2>
+            <p class="text-muted">Az adatok az adatbázisból töltődnek be (jelenleg csak szimulálva a böngészőben).</p>
+        </header>
+
+        <!--  -->
+        <div class="container-fluid mb-3">
+            <div class="row g-3">
+                <!-- 1/3 szélesség -->
+                <div class="col-lg-4">
+                    <section class="card designbox h-100">
+                        <div class="card-header text-center">
+                            <h2 class="display-6" style="color:  var(--primary-color);">Új rendelés</h2>
+                        </div>
+                        <div class="card-body overflow-auto">
+                            <!-- Ide kerül a rendelések felvétele -->
+                            <table class="table table-hover text-center align-middle">
+                                <thead class="table-primary">
+                                    <th colspan="2">Új bála hozzáadása:</th>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <label class="new-order-label" for="pine_type">Fenyő típusa:</label>
+                                        </td>
+                                        <td>
+                                            <select id="pine_type" class="form-control" name="treeType">
+                                                <option value="">-- Válassz --</option>
+                                                <option value="luc">Lucfenyő</option>
+                                                <option value="jegenye">Jegenye</option>
+                                                <option value="normand">Normand</option>
+                                                <option value="nobilis">Nobilis</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label class="new-order-label" for="batch_state">Állapot</label>
+                                        </td>
+                                        <td>
+                                            <select id="batch_state" class="form-control" name="treeState">
+                                                <option value="">-- Válassz --</option>
+                                                <option value="Arrived">Érkezett</option>
+                                                <option value="Taken">Elvitt</option>
+                                                <option value="Sold">Eladva</option>
+                                                <option value="Used">Lekötve</option>
+                                                <option value="Saved">Eltéve</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label class="new-order-label" for="number_of_pieces">Darabszám:</label>
+                                        </td>
+                                        <td>
+                                            <input id="number_of_pieces" class="form-control" type="number" name="darabszám">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <button class="btn btn-primary w-75">Mentés</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+                </div>
+                <!-- 2/3 szélesség -->
+                <div class="col-lg-8">
+                    <section class="card designbox h-100">
+                        <div class="card-header text-center">
+                            <h2 class="display-6" style="color:  var(--primary-color);">Raktári adatok</h2>
+                        </div>
+                        <div class="card-body overflow-auto">
+                            <table class="table table-hover text-center align-middle">
+                                <thead class="table-primary">
+                                    <tr>
+                                        <th>Állapot</th>
+                                        <th>Lucfenyő</th>
+                                        <th>Jegenye</th>
+                                        <th>Normand</th>
+                                        <th>Nobilis</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody id="pineTableBody">
+                                    <tr>
+                                        <td colspan="5">Adatok betöltése folyamatban...</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/api.js"></script>
+    <script src="js/index.js"></script>
+    <script>
+        // Amikor betölt az oldal, azonnal hívjuk meg a táblázat rajzoló funkciókat
+        document.addEventListener('DOMContentLoaded', () => {
+            loadPineData();
+        });
+    </script>
+</body>
+
+</html>
