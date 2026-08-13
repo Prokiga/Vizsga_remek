@@ -5,8 +5,7 @@ namespace FlowerAPI.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class PinetypeController : ControllerBase
+    public class PinebasetypeController : ControllerBase
     {
-
     }
 }

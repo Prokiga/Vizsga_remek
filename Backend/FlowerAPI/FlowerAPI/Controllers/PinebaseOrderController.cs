@@ -3,10 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FlowerAPI.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
-    public class PinetypeController : ControllerBase
+    public class PinebaseOrderController : ControllerBase
     {
-
     }
 }
