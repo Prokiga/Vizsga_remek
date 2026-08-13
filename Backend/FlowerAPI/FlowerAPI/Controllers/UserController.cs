@@ -1,4 +1,5 @@
 ﻿using FlowerAPI.Models;
+using FlowerAPI.Models.DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,12 +9,26 @@ namespace FlowerAPI.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        [HttpPost]
-        public ActionResult CreateUser([FromBody] User user)
+        private readonly SzinesNegyEvszakContext _szines_negy_evszak_context;
+
+        public UserController(SzinesNegyEvszakContext szines_negy_evszak_context)
         {
-            // Here you would typically save the user to a database
-            // For demonstration purposes, we'll just return the user object
-            return Ok(user);
+            _szines_negy_evszak_context = szines_negy_evszak_context;
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> CreateUser([FromBody] CreateUserDTO createUserDTO)
+        {
+            try
+            {
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            return Ok(new { Message = "User created successfully", UserName = createUserDTO.UserName });
         }
     }
 }

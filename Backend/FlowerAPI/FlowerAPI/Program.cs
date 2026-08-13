@@ -1,6 +1,8 @@
+using FlowerAPI.Models;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<SzinesNegyEvszakContext>();
 
 // Add services to the container.
 

@@ -1,4 +1,5 @@
 ﻿using FlowerAPI.Models;
+using FlowerAPI.Models.DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,11 +10,9 @@ namespace FlowerAPI.Controllers
     public class CostumerController : ControllerBase
     {
         [HttpPost]
-        public ActionResult CreateCostumer([FromBody] Costumer costumer)
+        public async Task<ActionResult> CreateCostumer([FromBody] CreateCostumersDTO createCostumersDTO)
         {
-            // Here you would typically save the costumer to a database
-            // For demonstration purposes, we'll just return the costumer object
-            return Ok(costumer);
+            return Ok(new { Message = "Costumer created successfully", CostumerName = createCostumersDTO.CostumerName });
         }
     }
 }
