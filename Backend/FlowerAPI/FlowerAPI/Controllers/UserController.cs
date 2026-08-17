@@ -2,6 +2,7 @@
 using FlowerAPI.Models.DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace FlowerAPI.Controllers
 {
@@ -21,14 +22,47 @@ namespace FlowerAPI.Controllers
         {
             try
             {
+                var user = new User
+                {
+                    UserName = createUserDTO.UserName,
+                    PassWord = createUserDTO.PassWord
+                };
 
+                if(user != null)
+                {
+                    await _szines_negy_evszak_context.Users.AddAsync(user);
+                    await _szines_negy_evszak_context.SaveChangesAsync();
+                    return Ok(new
+                    {
+                        Message = "A felhasználót sikeresen regisztráltuk",
+                        result = user
+                    });
+                }
+                return BadRequest(new { Message = "A felhasználót nem lehett létrehozni!" });
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                var realmessage = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
+                return BadRequest(realmessage);
             }
-            return Ok(new { Message = "User created successfully", UserName = createUserDTO.UserName });
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> GetAllUsers()
+        {
+            try
+            {
+                return Ok(new
+                {
+                    message = "Sikeres lekérdezés",
+                    result = await _szines_negy_evszak_context.Users.ToListAsync()
+                });
+            }
+            catch (Exception ex)
+            {
+                var realmessage = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
+                return BadRequest(realmessage);
+            }
         }
     }
 }
