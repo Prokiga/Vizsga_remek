@@ -59,7 +59,7 @@ namespace FlowerAPI.Controllers
                 return Ok(new
                 {
                     message = "Sikeres lekérdezés",
-                    result = await _szinesNegyEvszakContext.Costumers.ToListAsync()
+                    data = await _szinesNegyEvszakContext.Costumers.ToListAsync()
                 });
             }
             catch (Exception ex)
