@@ -60,10 +60,24 @@
                                             <label class="new-order-label" for="base_type">Alap típus:</label>
                                         </td>
                                         <td>
-                                            <select id="base_type" class="form-control" name="Fenyőtípus">
+                                            <select id="base_type" class="form-control" name="Alap Típus">
                                                 <option value="">-- Válassz --</option>
                                                 <option value="Small">Kicsi</option>
                                                 <option value="Big">Nagy</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label class="new-order-label" for="pine_type">Fenyő típus</label>
+                                        </td>
+                                        <td>
+                                            <select id="pine_type" class="form-control" name="Fenyőtípus">
+                                                <option value="">-- Válassz --</option>
+                                                <option value="Luc">Luc</option>
+                                                <option value="Normand">Normand</option>
+                                                <option value="Nobilis">Nobilis</option>
+                                                <option value="Jegenye">Jegenye</option>
                                             </select>
                                         </td>
                                     </tr>
@@ -105,16 +119,15 @@
                                     <tr>
                                         <th>Kinek</th>
                                         <th>Mikorra</th>
-                                        <th>Kicsi</th>
-                                        <th>Kész (pipa)</th>
-                                        <th>Nagy</th>
+                                        <th>Fenyő típus</th>
+                                        <th>Alap típus</th>
                                         <th>Kész (pipa)</th>
                                     </tr>
                                 </thead>
                                 <!-- Az id="wreathTableBody" segítségével a JS ide fogja betölteni az adatokat -->
                                 <tbody id="wreathTableBody">
                                     <tr>
-                                        <td colspan="6">Adatok betöltése folyamatban...</td>
+                                        <td colspan="5">Adatok betöltése folyamatban...</td>
                                     </tr>
                                 </tbody>
                             </table>

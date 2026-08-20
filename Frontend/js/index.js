@@ -138,9 +138,8 @@ function loadWreathData() {
             <tr>
                 <td class="text-start fw-bold">${row.name}</td>
                 <td>${row.date}</td>
+                <td>${row.pinetype}</td>
                 <td>${row.small || ""}</td>
-                <td>${keszJel}</td>
-                <td>${row.large || ""}</td>
                 <td>${keszJel}</td>
             </tr>
         `;

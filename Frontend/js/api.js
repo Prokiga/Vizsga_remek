@@ -25,11 +25,11 @@ const defaultPineData = [
 ];
 
 const defaultWreathData = [
-    { id: 1, name: "Kósa P", date: "11.14", small: 10, done: true, large: 0, done: false },
-    { id: 2, name: "Anita", date: "11.06", small: 2, done: false, large: 0, done: true },
-    { id: 3, name: "Zsuzsi", date: "11.07", small: 0, done: true, large: 0, done: true },
-    { id: 4, name: "Kocsisné", date: "11.10", small: 8, done: true, large: 0, done: false },
-    { id: 5, name: "Tündike", date: "11.07", small: 0, done: false, large: 0, done: true }
+    { id: 1, name: "Kósa P", date: "11.14", pinetype: "Jegenye", small: 10, done: true },
+    { id: 2, name: "Anita", date: "11.06", pinetype: "Luc", small: 2, done: true },
+    { id: 3, name: "Zsuzsi", date: "11.07", pinetype: "Normand", small: 0, done: true },
+    { id: 4, name: "Kocsisné", date: "11.10", pinetype: "Luc", small: 8, done: true },
+    { id: 5, name: "Tündike", date: "11.07", pinetype: "Nobilis",small: 0, done: true }
 ];
 
 const defaultCostumersData = [
