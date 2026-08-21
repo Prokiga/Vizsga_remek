@@ -27,7 +27,7 @@ namespace FlowerAPI.Controllers
                 {
                     PineTypeId = pinebatchOrderDTO.PineTypeId,
                     PinebatchStateId = pinebatchOrderDTO.PinebatchStateId,
-                    BatchQuantity = pinebatchOrderDTO.BatchQuantity,
+                    BatchQuantity = pinebatchOrderDTO.PineBatchQuantity,
                 };
                 if (pinebatchOrderDTO != null)
                 {
@@ -35,11 +35,11 @@ namespace FlowerAPI.Controllers
                     await _szines_negy_evszak_context.SaveChangesAsync();
                     return Ok(new
                     {
-                        Message = "A fenyőbatch rendelést sikeresen rögzítettük",
+                        Message = "A fenyőbála rendelést sikeresen rögzítettük",
                         result = pinebatchOrder
                     });
                 }
-                return BadRequest("A fenyőbatch rendeléshez szükséges minden mező kitöltése kötelező.");
+                return BadRequest("A fenyőbála rendeléshez minden mező kitöltése kötelező.");
             }
 
             catch (Exception ex)
@@ -56,7 +56,7 @@ namespace FlowerAPI.Controllers
             {
                 return Ok(new
                 {
-                    Message = "A fenyőbatch rendelések lekérése sikeresen megtörtént",
+                    Message = "A fenyőbála rendelések lekérése sikeresen megtörtént",
                     result = await _szines_negy_evszak_context.PinebatchOrders.ToListAsync(),
                 });
             }

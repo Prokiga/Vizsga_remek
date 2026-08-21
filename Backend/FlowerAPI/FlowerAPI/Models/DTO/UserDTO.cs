@@ -2,7 +2,7 @@
 
 namespace FlowerAPI.Models.DTO
 {
-    public class CreateUserDTO
+    public class UserDTO
     {
         [Required]
         public string? UserName { get; set; }

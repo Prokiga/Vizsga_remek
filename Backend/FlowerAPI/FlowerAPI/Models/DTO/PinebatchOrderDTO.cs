@@ -9,6 +9,6 @@ namespace FlowerAPI.Models.DTO
         [Required]
         public int? PinebatchStateId { get; set; }
         [Required]
-        public int? BatchQuantity { get; set; }
+        public int? PineBatchQuantity { get; set; }
     }
 }

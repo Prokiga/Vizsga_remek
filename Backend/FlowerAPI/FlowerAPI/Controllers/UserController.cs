@@ -18,7 +18,7 @@ namespace FlowerAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> CreateUser([FromBody] CreateUserDTO createUserDTO)
+        public async Task<ActionResult> CreateUser([FromBody] UserDTO createUserDTO)
         {
             try
             {

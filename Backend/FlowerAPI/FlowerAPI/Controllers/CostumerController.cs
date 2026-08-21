@@ -18,7 +18,7 @@ namespace FlowerAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> CreateCostumer([FromBody] CreateCostumersDTO createCostumersDTO)
+        public async Task<ActionResult> CreateCostumer([FromBody] CostumersDTO createCostumersDTO)
         {
             try
             {
