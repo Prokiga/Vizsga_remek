@@ -57,6 +57,20 @@
                                     </tr>
                                     <tr>
                                         <td>
+                                            <label class="new-order-label" for="pine_type">Fenyő fajta</label>
+                                        </td>
+                                        <td>
+                                            <select id="pine_type" class="form-control" name="Fenyőfajta">
+                                                <option value="">-- Válassz --</option>
+                                                <option value="Luc">Luc</option>
+                                                <option value="Normand">Normand</option>
+                                                <option value="Nobilis">Nobilis</option>
+                                                <option value="Jegenye">Jegenye</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
                                             <label class="new-order-label" for="base_type">Alap típus:</label>
                                         </td>
                                         <td>
@@ -64,20 +78,6 @@
                                                 <option value="">-- Válassz --</option>
                                                 <option value="Small">Kicsi</option>
                                                 <option value="Big">Nagy</option>
-                                            </select>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <label class="new-order-label" for="pine_type">Fenyő típus</label>
-                                        </td>
-                                        <td>
-                                            <select id="pine_type" class="form-control" name="Fenyőtípus">
-                                                <option value="">-- Válassz --</option>
-                                                <option value="Luc">Luc</option>
-                                                <option value="Normand">Normand</option>
-                                                <option value="Nobilis">Nobilis</option>
-                                                <option value="Jegenye">Jegenye</option>
                                             </select>
                                         </td>
                                     </tr>
@@ -119,9 +119,9 @@
                                     <tr>
                                         <th>Kinek</th>
                                         <th>Mikorra</th>
-                                        <th>Fenyő típus</th>
+                                        <th>Fenyő fajta</th>
                                         <th>Alap típus</th>
-                                        <th>Kész (pipa)</th>
+                                        <th>Kész</th>
                                     </tr>
                                 </thead>
                                 <!-- Az id="wreathTableBody" segítségével a JS ide fogja betölteni az adatokat -->

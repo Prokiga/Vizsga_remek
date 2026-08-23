@@ -40,6 +40,10 @@ const defaultCostumersData = [
     { id: 5, name: "Tündike", postal_code: "3398", city: 0, address: false, phonenumber: 0, taxnumber: true }
 ];
 
+// --- ADATBÁZIS FÜGGVÉNYEK (Valódi lekérések) ---
+
+
+
 // --- ADATBÁZIS FÜGGVÉNYEK (Local Storage szimuláció) ---
 
 // 1. Fenyőbála adatok lekérése

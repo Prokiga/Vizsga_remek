@@ -68,5 +68,83 @@ namespace FlowerAPI.Controllers
                 return BadRequest(realmessage);
             }
         }
+
+        [HttpGet("{name}")]
+        public async Task<ActionResult> GetCostumerByName(string name)
+        {
+            try
+            {
+                var costumer = await _szinesNegyEvszakContext.Costumers.FirstOrDefaultAsync(c => c.CostumerName == name);
+                if (costumer == null)
+                {
+                    return NotFound(new { Message = "A vásárló nem található!" });
+                }
+                return Ok(new
+                {
+                    message = "Sikeres lekérdezés",
+                    result = costumer
+                });
+            }
+            catch (Exception ex)
+            {
+                var realmessage = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
+                return BadRequest(realmessage);
+            }
+        }
+
+        [HttpPut]
+        public async Task<ActionResult> UpdateCostumer([FromQuery] int id, [FromBody] CostumersDTO updateCostumersDTO)
+        {
+            try
+            {
+                var costumer = await _szinesNegyEvszakContext.Costumers.FirstOrDefaultAsync(c => c.CostumerId == id);
+                if (costumer == null)
+                {
+                    return NotFound(new { Message = "A vásárló nem található!" });
+                }
+                costumer.CostumerTaxnumber = updateCostumersDTO.CostumerTaxnumber;
+                costumer.CostumerPhonenumber = updateCostumersDTO.CostumerPhonenumber;
+                costumer.CostumerPostalCode = updateCostumersDTO.CostumerPostalCode;
+                costumer.CostumerCity = updateCostumersDTO.CostumerCity;
+                costumer.CostumerAddress = updateCostumersDTO.CostumerAddress;
+                _szinesNegyEvszakContext.Update(costumer);
+                await _szinesNegyEvszakContext.SaveChangesAsync();
+                return Ok(new
+                {
+                    Message = "Vásárló sikeresen frissítve.",
+                    result = costumer
+                });
+            }
+            catch (Exception ex)
+            {
+                var realmessage = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
+                return BadRequest(realmessage);
+            }
+        }
+
+        [HttpDelete]
+        public async Task<ActionResult> DeleteCostumer([FromQuery] int id)
+        {
+            try
+            {
+                var costumer = await _szinesNegyEvszakContext.Costumers.FirstOrDefaultAsync(c => c.CostumerId == id);
+                if (costumer == null)
+                {
+                    return NotFound(new { Message = "A vásárló nem található!" });
+                }
+                _szinesNegyEvszakContext.Costumers.Remove(costumer);
+                await _szinesNegyEvszakContext.SaveChangesAsync();
+                return Ok(new
+                {
+                    Message = "Vásárló sikeresen törölve.",
+                    result = costumer
+                });
+            }
+            catch (Exception ex)
+            {
+                var realmessage = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
+                return BadRequest(realmessage);
+            }
+        }
     }
 }
