@@ -13,13 +13,13 @@ public partial class PinebaseOrder
 
     public int? Pinebasetype { get; set; }
 
-    public int? BatchQuantity { get; set; }
+    public int? BaseQuantity { get; set; }
 
-    public bool? BatchState { get; set; }
+    public bool? BaseState { get; set; }
 
-    public DateTime? BatchOrderedDate { get; set; }
+    public DateTime? BaseOrderedDate { get; set; }
 
-    public DateTime? BatchUpdatedAt { get; set; }
+    public DateTime? BaseUpdatedAt { get; set; }
 
     public virtual Costumer? Costumer { get; set; }
 

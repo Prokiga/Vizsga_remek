@@ -73,14 +73,14 @@ public partial class SzinesNegyEvszakContext : DbContext
             entity.HasIndex(e => e.Pinebasetype, "fk_pinebasetype");
 
             entity.Property(e => e.BaseId).HasColumnName("base_id");
-            entity.Property(e => e.BatchOrderedDate)
+            entity.Property(e => e.BaseOrderedDate)
                 .HasColumnType("date")
-                .HasColumnName("batch_ordered_date");
-            entity.Property(e => e.BatchQuantity).HasColumnName("batch_quantity");
-            entity.Property(e => e.BatchState).HasColumnName("batch_state");
-            entity.Property(e => e.BatchUpdatedAt)
+                .HasColumnName("base_ordered_date");
+            entity.Property(e => e.BaseQuantity).HasColumnName("base_quantity");
+            entity.Property(e => e.BaseState).HasColumnName("base_state");
+            entity.Property(e => e.BaseUpdatedAt)
                 .HasColumnType("date")
-                .HasColumnName("batch_updated_at");
+                .HasColumnName("base_updated_at");
             entity.Property(e => e.CostumerId).HasColumnName("costumer_id");
             entity.Property(e => e.PineTypeId).HasColumnName("pine_type_id");
             entity.Property(e => e.Pinebasetype).HasColumnName("pinebasetype");
@@ -122,11 +122,11 @@ public partial class SzinesNegyEvszakContext : DbContext
 
             entity.Property(e => e.BatchId).HasColumnName("batch_id");
             entity.Property(e => e.BatchArrivedDate)
-                .HasColumnType("timestamp")
+                .HasColumnType("date")
                 .HasColumnName("batch_arrived_date");
             entity.Property(e => e.BatchQuantity).HasColumnName("batch_quantity");
             entity.Property(e => e.BatchUpdatedAt)
-                .HasColumnType("timestamp")
+                .HasColumnType("date")
                 .HasColumnName("batch_updated_at");
             entity.Property(e => e.PineTypeId).HasColumnName("pine_type_id");
             entity.Property(e => e.PinebatchStateId).HasColumnName("pinebatch_state_id");

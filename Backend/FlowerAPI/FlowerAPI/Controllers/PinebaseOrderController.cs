@@ -27,8 +27,8 @@ namespace FlowerAPI.Controllers
                     CostumerId = pinebaseOrderDTO.CostumerId,
                     PineTypeId = pinebaseOrderDTO.PineTypeId,
                     Pinebasetype = pinebaseOrderDTO.Pinebasetype,
-                    BatchQuantity = pinebaseOrderDTO.BatchQuantity,
-                    BatchOrderedDate = pinebaseOrderDTO.BatchOrderedDate,
+                    BaseQuantity = pinebaseOrderDTO.BatchQuantity,
+                    BaseOrderedDate = pinebaseOrderDTO.BatchOrderedDate,
                 };
 
                 if (pinebaseOrderDTO != null)
@@ -51,7 +51,6 @@ namespace FlowerAPI.Controllers
             }
         }
 
-
         [HttpGet]
         public async Task<ActionResult> GetAllPinebaseOrder()
         {
@@ -61,6 +60,29 @@ namespace FlowerAPI.Controllers
                 {
                     message = "Sikeres lekérdezés",
                     result = await _szines_negy_evszak_context.PinebaseOrders.ToListAsync(),
+                });
+            }
+            catch (Exception ex)
+            {
+                var realmessage = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
+                return BadRequest(realmessage);
+            }
+        }
+
+        [HttpGet("{BaseId}")]
+        public async Task<ActionResult> GetPinebaseOrderById(int BaseId)
+        {
+            try
+            {
+                var pinebaseOrder = await _szines_negy_evszak_context.PinebaseOrders.FirstOrDefaultAsync(p => p.BaseId == BaseId);
+                if (pinebaseOrder == null)
+                {
+                    return NotFound(new { Message = "A fenyőalap rendelés nem található!" });
+                }
+                return Ok(new
+                {
+                    message = "Sikeres lekérdezés",
+                    result = pinebaseOrder
                 });
             }
             catch (Exception ex)
