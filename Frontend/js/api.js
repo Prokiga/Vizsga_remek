@@ -42,7 +42,32 @@ const defaultCostumersData = [
 
 // --- ADATBÁZIS FÜGGVÉNYEK (Valódi lekérések) ---
 
+async function apiGetUserData(name)
+{
+    try
+    {
+        const response = await fetch(
+            `User/GetUserByName = ${encodeURIComponent(name)}`
+        );
 
+        if (!response.ok)
+        {
+            const error = await response.json();
+            throw new Error(error.message || 'Hiba történt!');
+        }
+
+        const data = await response.json();
+        console.log(data);
+        console.log(data.result);
+
+        return data.result;
+    }
+    catch (error) 
+    {
+        console.error('Hiba:', error);
+        return null;
+    }
+}
 
 // --- ADATBÁZIS FÜGGVÉNYEK (Local Storage szimuláció) ---
 
