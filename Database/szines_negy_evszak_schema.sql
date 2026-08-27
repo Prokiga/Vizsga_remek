@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1:3306
--- Létrehozás ideje: 2026. Aug 08. 06:18
+-- Létrehozás ideje: 2026. Aug 27. 15:07
 -- Kiszolgáló verziója: 8.4.7
 -- PHP verzió: 8.3.28
 
@@ -30,12 +30,12 @@ SET time_zone = "+00:00";
 DROP TABLE IF EXISTS `costumers`;
 CREATE TABLE IF NOT EXISTS `costumers` (
   `costumer_id` int NOT NULL AUTO_INCREMENT,
-  `costumer_name` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `costumer_taxnumber` varchar(13) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `costumer_name` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `costumer_taxnumber` varchar(13) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `costumer_postal_code` int DEFAULT NULL,
-  `costumer_city` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `costumer_address` varchar(60) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `costumer_phonenumber` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `costumer_city` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `costumer_address` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `costumer_phonenumber` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`costumer_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `costumers` (
 DROP TABLE IF EXISTS `pinebasetype`;
 CREATE TABLE IF NOT EXISTS `pinebasetype` (
   `base_id` int NOT NULL AUTO_INCREMENT,
-  `base_type` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `base_type` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`base_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -64,10 +64,10 @@ CREATE TABLE IF NOT EXISTS `pinebase_order` (
   `costumer_id` int DEFAULT NULL,
   `pine_type_id` int DEFAULT NULL,
   `pinebasetype` int DEFAULT NULL,
-  `batch_quantity` int DEFAULT NULL,
-  `batch_state` tinyint(1) DEFAULT NULL,
-  `batch_ordered_date` date DEFAULT NULL,
-  `batch_updated_at` date DEFAULT NULL,
+  `base_quantity` int DEFAULT NULL,
+  `base_state` tinyint(1) DEFAULT NULL,
+  `base_ordered_date` date DEFAULT NULL,
+  `base_updated_at` date DEFAULT NULL,
   PRIMARY KEY (`base_id`),
   KEY `fk_costumer_id` (`costumer_id`),
   KEY `fk_pinebase_pinetype` (`pine_type_id`),
@@ -83,7 +83,7 @@ CREATE TABLE IF NOT EXISTS `pinebase_order` (
 DROP TABLE IF EXISTS `pinebatchstate`;
 CREATE TABLE IF NOT EXISTS `pinebatchstate` (
   `batch_state_id` int NOT NULL AUTO_INCREMENT,
-  `batch_state` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `batch_state` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`batch_state_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -99,8 +99,8 @@ CREATE TABLE IF NOT EXISTS `pinebatch_order` (
   `pine_type_id` int DEFAULT NULL,
   `pinebatch_state_id` int DEFAULT NULL,
   `batch_quantity` int DEFAULT NULL,
-  `batch_arrived_date` timestamp NULL DEFAULT NULL,
-  `batch_updated_at` timestamp NULL DEFAULT NULL,
+  `batch_arrived_date` date DEFAULT NULL,
+  `batch_updated_at` date DEFAULT NULL,
   PRIMARY KEY (`batch_id`),
   KEY `fk_pinebatch_pinetype` (`pine_type_id`),
   KEY `fk_pinebatch_state_id` (`pinebatch_state_id`)
@@ -115,7 +115,7 @@ CREATE TABLE IF NOT EXISTS `pinebatch_order` (
 DROP TABLE IF EXISTS `pinetypes`;
 CREATE TABLE IF NOT EXISTS `pinetypes` (
   `pine_id` int NOT NULL AUTO_INCREMENT,
-  `pine_type` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `pine_type` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`pine_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -128,8 +128,8 @@ CREATE TABLE IF NOT EXISTS `pinetypes` (
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `user_id` int NOT NULL AUTO_INCREMENT,
-  `user_name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `pass_word` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `pass_word` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 

@@ -16,7 +16,7 @@ if (logoutBtn) {
 // --------------------------------------------------------------------------
 const loginForm = document.getElementById('loginForm');
 if (loginForm) {
-    loginForm.addEventListener('submit', function(event) {
+    loginForm.addEventListener('submit', async function(event) {
         // Megakadályozzuk, hogy az oldal újratöltődjön
         event.preventDefault();
 
@@ -24,13 +24,18 @@ if (loginForm) {
         const user = document.getElementById('username').value;
         const pass = document.getElementById('password').value;
 
-        // Egy egyszerű (amatőr de vizsgára jó) ellenőrzés
-        if (user === "admin" && pass === "1234") {
-            // Ha jó, átirányítjuk a főmenübe
-            window.location.href = "Options.html"
-        } else {
-            // Ha rossz, megmutatjuk a hibaüzenetet (levesszük a d-none osztályt)
-            document.getElementById('loginError').classList.remove('d-none');
+        const loginError = document.getElementById('loginError');
+        loginError.classList.add('d-done');
+
+        try
+        {
+            const result = await apiLogin(user, pass);
+            console.log('Sikeres bejelentkezés: ', result);
+            window.location.href = "Options.html";
+        } catch (error)
+        {
+            console.error(error);
+            loginError.classList.remove('d-done');
         }
     });
 }

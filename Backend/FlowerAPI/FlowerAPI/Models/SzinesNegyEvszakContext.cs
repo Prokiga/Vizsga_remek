@@ -172,7 +172,7 @@ public partial class SzinesNegyEvszakContext : DbContext
 
             entity.Property(e => e.UserId).HasColumnName("user_id");
             entity.Property(e => e.PassWord)
-                .HasMaxLength(10)
+                .HasMaxLength(255)
                 .HasColumnName("pass_word");
             entity.Property(e => e.UserName)
                 .HasMaxLength(50)

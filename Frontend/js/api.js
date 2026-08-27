@@ -42,31 +42,40 @@ const defaultCostumersData = [
 
 // --- ADATBÁZIS FÜGGVÉNYEK (Valódi lekérések) ---
 
-async function apiGetUserData(name)
+async function login(username, password)
 {
     try
     {
         const response = await fetch(
-            `User/GetUserByName = ${encodeURIComponent(name)}`
-        );
-
-        if (!response.ok)
+            'https://localhost:7095/User/Login',
         {
-            const error = await response.json();
-            throw new Error(error.message || 'Hiba történt!');
-        }
+            method: 'POST',
+            headers:
+            {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(
+                {
+                    userName: username,
+                    passWord: password
+                })
+        });
 
         const data = await response.json();
-        console.log(data);
-        console.log(data.result);
+        if (!response.ok) 
+        {
+            throw new Error(
+                data.message || "Hibás felhasználónév vagy jelszó!"
+            );
+        }
 
-        return data.result;
-    }
-    catch (error) 
+        return data;
+    } 
+    catch (error)
     {
-        console.error('Hiba:', error);
-        return null;
-    }
+        console.error('Bejelentkezési hiba: ', error);
+        throw error;
+    }    
 }
 
 // --- ADATBÁZIS FÜGGVÉNYEK (Local Storage szimuláció) ---

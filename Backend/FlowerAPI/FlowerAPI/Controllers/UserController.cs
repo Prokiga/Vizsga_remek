@@ -22,10 +22,21 @@ namespace FlowerAPI.Controllers
         {
             try
             {
+                var existingUser = await _szines_negy_evszak_context.Users.FirstOrDefaultAsync(u => u.UserName == createUserDTO.UserName);
+
+                if (existingUser == null)
+                {
+                    return BadRequest(new
+                    {
+                        Message = "A felhasználó már létezik!"
+                    });
+                }
+
+                var hashedPassword = BCrypt.Net.BCrypt.HashPassword(createUserDTO.PassWord);
                 var user = new User
                 {
                     UserName = createUserDTO.UserName,
-                    PassWord = createUserDTO.PassWord
+                    PassWord = hashedPassword
                 };
 
                 if (user != null)
@@ -35,10 +46,52 @@ namespace FlowerAPI.Controllers
                     return Ok(new
                     {
                         Message = "A felhasználót sikeresen regisztráltuk",
-                        result = user
+                        result = new
+                        {
+                            user.UserId,
+                            user.UserName
+                        }
                     });
                 }
                 return BadRequest(new { Message = "A felhasználót nem lehett létrehozni!" });
+            }
+
+            catch (Exception ex)
+            {
+                var realmessage = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
+                return BadRequest(realmessage);
+            }
+        }
+
+        [HttpPost("login")]
+        public async Task<ActionResult> Login([FromBody] UserDTO loginDTO)
+        {
+            try
+            {
+                var user = await _szines_negy_evszak_context.Users.FirstOrDefaultAsync(u => u.UserName == loginDTO.UserName);
+                if (user == null)
+                {
+                    return Unauthorized(new
+                    {
+                        Message = "Nincs ilyen felhasználó!"
+                    });
+                }
+                if (!BCrypt.Net.BCrypt.Verify(loginDTO.PassWord, user.PassWord))
+                {
+                    return Unauthorized (new
+                    {
+                        Message = "Hibás jelszó!"
+                    });
+                }
+                return Ok(new
+                {
+                    Message = "Sikeres bejelentkezés",
+                    result = new
+                    {
+                        user.UserId,
+                        user.UserName
+                    }
+                });
             }
             catch (Exception ex)
             {
