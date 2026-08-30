@@ -29,40 +29,46 @@ if (loginForm) {
 
         try
         {
-            const result = await apiLogin(user, pass);
+            const result = await login(user, pass);
             console.log('Sikeres bejelentkezés: ', result);
             window.location.href = "Options.html";
         } catch (error)
         {
-            console.error(error);
-            loginError.classList.remove('d-done');
+            console.log(error);
+            loginError.classList.remove('d-none');
         }
     });
 }
 
 // --------------------------------------------------------------------------
-// 1. REGISZTRÁCIÓ OLDAL (index.html)
+// 1. REGISZTRÁCIÓ (index.html)
 // --------------------------------------------------------------------------
-/*const loginForm = document.getElementById('loginForm');
-if (loginForm) {
-    loginForm.addEventListener('registry', function(event) {
+const registryButton = document.getElementById('registryButton');
+if (registryButton) {
+    registryButton.addEventListener('click', async function(event) {
         // Megakadályozzuk, hogy az oldal újratöltődjön
         event.preventDefault();
 
         // Kiolvassuk a beírt adatokat
-        var user = document.getElementById('username').value;
-        var pass = document.getElementById('password').value;
+        const user = document.getElementById('username').value;
+        const pass = document.getElementById('password').value;
 
-        // Itt kellene elmenteni az új adatokat az adatbázisba
-        if (user === "admin" && pass === "1234") {
-            // Ha jó, átirányítjuk a főmenübe
-            window.location.href = "options.html";
-        } else {
-            // Ha rossz, megmutatjuk a hibaüzenetet (levesszük a d-none osztályt)
+        // Ha rossz, megmutatjuk a hibaüzenetet (levesszük a d-none osztályt)
+        document.getElementById('loginError').classList.remove('d-none');
+
+        try
+        {
+            const result = await registerNewUser(user, pass);
+            document.getElementById('loginError').textContent = "Sikeres regisztráció.";
+        }
+        catch (error)
+        {
+            console.log('Regisztrációs hiba: ', error);
+            document.getElementById('loginError').textContent = error.message;
             document.getElementById('loginError').classList.remove('d-none');
         }
     });
-}*/
+}
 
 // --------------------------------------------------------------------------
 // 2. FENYŐBÁLA OLDAL (PineBatch.html)

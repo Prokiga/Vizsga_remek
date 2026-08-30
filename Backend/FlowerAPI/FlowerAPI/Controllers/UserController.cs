@@ -24,7 +24,7 @@ namespace FlowerAPI.Controllers
             {
                 var existingUser = await _szines_negy_evszak_context.Users.FirstOrDefaultAsync(u => u.UserName == createUserDTO.UserName);
 
-                if (existingUser == null)
+                if (existingUser != null)
                 {
                     return BadRequest(new
                     {
@@ -39,21 +39,17 @@ namespace FlowerAPI.Controllers
                     PassWord = hashedPassword
                 };
 
-                if (user != null)
+                await _szines_negy_evszak_context.Users.AddAsync(user);
+                await _szines_negy_evszak_context.SaveChangesAsync();
+                return Ok(new
                 {
-                    await _szines_negy_evszak_context.Users.AddAsync(user);
-                    await _szines_negy_evszak_context.SaveChangesAsync();
-                    return Ok(new
+                    Message = "A felhasználót sikeresen regisztráltuk",
+                    result = new
                     {
-                        Message = "A felhasználót sikeresen regisztráltuk",
-                        result = new
-                        {
-                            user.UserId,
-                            user.UserName
-                        }
-                    });
-                }
-                return BadRequest(new { Message = "A felhasználót nem lehett létrehozni!" });
+                        user.UserId,
+                        user.UserName
+                    }
+                });
             }
 
             catch (Exception ex)
@@ -78,7 +74,7 @@ namespace FlowerAPI.Controllers
                 }
                 if (!BCrypt.Net.BCrypt.Verify(loginDTO.PassWord, user.PassWord))
                 {
-                    return Unauthorized (new
+                    return Unauthorized(new
                     {
                         Message = "Hibás jelszó!"
                     });
@@ -99,7 +95,7 @@ namespace FlowerAPI.Controllers
                 return BadRequest(realmessage);
             }
         }
-
+        /*
         [HttpGet]
         public async Task<ActionResult> GetAllUsers()
         {
@@ -191,6 +187,6 @@ namespace FlowerAPI.Controllers
                 var realmessage = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
                 return BadRequest(realmessage);
             }
-        }
+        }*/
     }
 }

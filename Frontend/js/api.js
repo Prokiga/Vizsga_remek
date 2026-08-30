@@ -73,10 +73,46 @@ async function login(username, password)
     } 
     catch (error)
     {
-        console.error('Bejelentkezési hiba: ', error);
+        console.log('Bejelentkezési hiba: ', error);
         throw error;
     }    
 }
+
+async function registerNewUser(username, password)
+{
+    try
+    {
+        const response = await fetch(
+            'https://localhost:7095/User',
+        {
+            method: 'POST',
+            headers:
+            {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(
+                {
+                    userName: username,
+                    passWord: password
+                })
+        });
+
+        const data = await response.json();
+        if (!response.ok) 
+        {
+            throw new Error(
+                data.message || "A regisztráció sikertelen!"
+            );
+        }
+        return data;
+    } 
+    catch (error)
+    {
+        console.log('Regisztrációs hiba: ', error);
+        throw error;
+    }    
+}
+
 
 // --- ADATBÁZIS FÜGGVÉNYEK (Local Storage szimuláció) ---
 
