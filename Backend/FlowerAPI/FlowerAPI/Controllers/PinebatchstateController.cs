@@ -17,15 +17,18 @@ namespace FlowerAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> GetAllPineBatchStates()
+        public async Task<ActionResult> GetPineBatchStates()
         {
             try
             {
-                return Ok(new
-                {
-                    message = "Sikeres lekérdezés",
-                    data = await _szinesNegyEvszakContext.Pinebatchstates.Select(x => x.BatchState).ToListAsync()
-                });
+                var pineBatchStates = await _szinesNegyEvszakContext.Pinebatchstates
+                    .Select(u => new
+                    {
+                        u.BatchStateId,
+                        u.BatchState
+                    })
+                    .ToListAsync();
+                return Ok(pineBatchStates);
             }
             catch (Exception ex)
             {

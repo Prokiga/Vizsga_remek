@@ -74,10 +74,58 @@ if (registryButton) {
 // 2. FENYŐBÁLA OLDAL (PineBatch.html)
 // --------------------------------------------------------------------------
 
-function loadPineType()
+//  A fenyőfajták lekérdezése
+async function loadPineTypes()
 {
-    
+    try
+    {
+        const pinetypes = await getPineTypes();
+        const dropdown = document.getElementById("pine_type_dropdown");
+
+        pinetypes.forEach(pinetype => 
+        {
+            const option = document.createElement("option");
+            option.value = pinetype.pineId;
+            option.textContent = pinetype.pineType;
+            dropdown.appendChild(option);
+        });
+    }
+    catch (error)
+    {
+        console.log("Hiba a fenyőalapok betöltésekor: ", error);
+    }
 }
+
+// A fenyőbálák állapotának lekérdezése
+async function loadPineBatchState()
+{
+    try
+    {
+        const batchstates = await GetPineBatchStates();
+        const dropdown = document.getElementById("batch_state_dropdown");
+
+        batchstates.forEach(batchstate => 
+        {
+            const option = document.createElement("option");
+            option.value = batchstate.batchStateId;
+            option.textContent = batchstate.batchState;
+            dropdown.appendChild(option);
+        });
+    }
+    catch (error)
+    {
+        console.log("Hiba az állapotok betöltésekor: ", error);
+    }
+}
+
+
+
+
+
+
+
+
+
 
 // --------------------------------------------------------------------------
 // 2. FENYŐBÁLA ÉS KOSZORÚALAP OLDAL (Pinebase.html)

@@ -42,6 +42,10 @@ const defaultCostumersData = [
 
 // --- ADATBÁZIS FÜGGVÉNYEK (Valódi lekérések) ---
 
+// --------------------------------------------------------------------------
+// 1. BEJELENTKEZÉS OLDAL (index.html)
+// --------------------------------------------------------------------------
+
 async function login(username, password)
 {
     try
@@ -78,6 +82,10 @@ async function login(username, password)
     }    
 }
 
+// --------------------------------------------------------------------------
+// 1. REGISZTRÁCIÓ (index.html)
+// --------------------------------------------------------------------------
+
 async function registerNewUser(username, password)
 {
     try
@@ -112,6 +120,39 @@ async function registerNewUser(username, password)
         throw error;
     }    
 }
+
+// A fenyőtípusok neveinek és betöltése a dropdownlist-be.
+
+async function getPineTypes() 
+{
+    const response = await fetch("https://localhost:7095/Pinetype");
+
+    if (!response.ok)
+    {
+        throw new Error("Nem sikerült a fenyőfajtákat betölteni!");
+    }
+
+    return await response.json();
+}
+
+// A fenyőbálák állapotainak betöltése a dropdownlist-be.
+async function GetPineBatchStates()
+{
+    const response = await fetch("https://localhost:7095/Pinebatchstate");
+
+    if (!response.ok)
+    {
+        throw new Error("Nem sikerült a fenyőbála állapotokat betölteni!");
+    }
+
+    return await response.json();
+}
+
+
+
+
+
+
 
 
 // --- ADATBÁZIS FÜGGVÉNYEK (Local Storage szimuláció) ---

@@ -45,12 +45,8 @@
                                             <label class="new-order-label" for="pine_type">Fenyő fajta:</label>
                                         </td>
                                         <td>
-                                            <select id="pine_type" class="form-control" name="treeType">
+                                            <select id="pine_type_dropdown" class="form-control" name="treeType">
                                                 <option value="">-- Válassz --</option>
-                                                <option value="luc">Lucfenyő</option>
-                                                <option value="jegenye">Jegenye</option>
-                                                <option value="normand">Normand</option>
-                                                <option value="nobilis">Nobilis</option>
                                             </select>
                                         </td>
                                     </tr>
@@ -59,13 +55,8 @@
                                             <label class="new-order-label" for="batch_state">Állapot</label>
                                         </td>
                                         <td>
-                                            <select id="batch_state" class="form-control" name="treeState">
+                                            <select id="batch_state_dropdown" class="form-control" name="treeState">
                                                 <option value="">-- Válassz --</option>
-                                                <option value="Arrived">Érkezett</option>
-                                                <option value="Taken">Elvitt</option>
-                                                <option value="Sold">Eladva</option>
-                                                <option value="Used">Lekötve</option>
-                                                <option value="Saved">Eltéve</option>
                                             </select>
                                         </td>
                                     </tr>
@@ -124,6 +115,8 @@
         // Amikor betölt az oldal, azonnal hívjuk meg a táblázat rajzoló funkciókat
         document.addEventListener('DOMContentLoaded', () => {
             loadPineData();
+            loadPineTypes();
+            loadPineBatchState();
         });
     </script>
 </body>

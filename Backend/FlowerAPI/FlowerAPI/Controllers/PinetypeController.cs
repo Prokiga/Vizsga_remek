@@ -21,11 +21,15 @@ namespace FlowerAPI.Controllers
         {
             try
             {
-                return Ok(new
-                {
-                    message = "Sikeres lekérdezés",
-                    data = await _szinesNegyEvszakContext.Pinetypes.Select(x => x.PineType).ToListAsync()
-                });
+                var pinetypes = await _szinesNegyEvszakContext.Pinetypes
+                    .Select(u => new
+                    {
+                        u.PineId,
+                        u.PineType
+                    })
+                    .ToListAsync();
+
+                 return Ok(pinetypes);
 
             }
             catch (Exception ex)
