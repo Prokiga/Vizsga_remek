@@ -23,23 +23,26 @@ namespace FlowerAPI.Controllers
         {
             try
             {
+                if (pinebatchOrderDTO == null)
+                {
+                    return BadRequest("A fenyőbála rendeléshez minden mező kitöltése kötelező.");
+                }
+
                 var pinebatchOrder = new PinebatchOrder
                 {
                     PineTypeId = pinebatchOrderDTO.PineTypeId,
                     PinebatchStateId = pinebatchOrderDTO.PinebatchStateId,
                     BatchQuantity = pinebatchOrderDTO.PineBatchQuantity,
                 };
-                if (pinebatchOrderDTO != null)
+
+                await _szines_negy_evszak_context.PinebatchOrders.AddAsync(pinebatchOrder);
+                await _szines_negy_evszak_context.SaveChangesAsync();
+
+                return Ok(new
                 {
-                    await _szines_negy_evszak_context.PinebatchOrders.AddAsync(pinebatchOrder);
-                    await _szines_negy_evszak_context.SaveChangesAsync();
-                    return Ok(new
-                    {
-                        Message = "A fenyőbála rendelést sikeresen rögzítettük",
-                        result = pinebatchOrder
-                    });
-                }
-                return BadRequest("A fenyőbála rendeléshez minden mező kitöltése kötelező.");
+                    Message = "A fenyőbála rendelést sikeresen rögzítettük",
+                    result = pinebatchOrder
+                });
             }
 
             catch (Exception ex)
@@ -54,15 +57,24 @@ namespace FlowerAPI.Controllers
         {
             try
             {
-                return Ok(new
-                {
-                    Message = "A fenyőbála rendelések lekérése sikeresen megtörtént",
-                    result = await _szines_negy_evszak_context.PinebatchOrders.ToListAsync(),
-                });
+                var pinebatchOrders = await _szines_negy_evszak_context.PinebatchOrders
+                    .Select(u => new
+                    {
+                        PineTypeId = u.PineTypeId,
+                        PinebatchStateId = u.PinebatchStateId,
+                        PinebatchState = u.PinebatchState!.BatchState,
+                        BatchQuantity = u.BatchQuantity
+                    })
+                    .ToListAsync();
+
+                return Ok(pinebatchOrders);
             }
             catch (Exception ex)
             {
-                var realmessage = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
+                var realmessage = ex.InnerException != null
+                    ? ex.InnerException.Message
+                    : ex.Message;
+
                 return BadRequest(realmessage);
             }
         }

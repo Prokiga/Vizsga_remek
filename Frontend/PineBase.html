@@ -60,24 +60,18 @@
                                             <label class="new-order-label" for="pine_type">Fenyő fajta</label>
                                         </td>
                                         <td>
-                                            <select id="pine_type" class="form-control" name="Fenyőfajta">
+                                            <select id="pine_type_dropdown" class="form-control" name="Fenyőfajta">
                                                 <option value="">-- Válassz --</option>
-                                                <option value="Luc">Luc</option>
-                                                <option value="Normand">Normand</option>
-                                                <option value="Nobilis">Nobilis</option>
-                                                <option value="Jegenye">Jegenye</option>
                                             </select>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <label class="new-order-label" for="base_type">Alap típus:</label>
+                                            <label class="new-order-label">Alap típus:</label>
                                         </td>
                                         <td>
-                                            <select id="base_type" class="form-control" name="Alap Típus">
+                                            <select id="base_type_dropdown" class="form-control" name="Alap Típus">
                                                 <option value="">-- Válassz --</option>
-                                                <option value="Small">Kicsi</option>
-                                                <option value="Big">Nagy</option>
                                             </select>
                                         </td>
                                     </tr>
@@ -142,7 +136,8 @@
     <script>
         // Amikor betölt az oldal, azonnal hívjuk meg a táblázat rajzoló funkciókat
         document.addEventListener('DOMContentLoaded', () => {
-            loadWreathData();
+            loadPineTypes();
+            loadPineBaseTypes();
         });
     </script>
 </body>

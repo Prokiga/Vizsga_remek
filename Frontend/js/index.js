@@ -75,6 +75,7 @@ if (registryButton) {
 // --------------------------------------------------------------------------
 
 //  A fenyőfajták lekérdezése
+
 async function loadPineTypes()
 {
     try
@@ -97,6 +98,7 @@ async function loadPineTypes()
 }
 
 // A fenyőbálák állapotának lekérdezése
+
 async function loadPineBatchState()
 {
     try
@@ -118,107 +120,167 @@ async function loadPineBatchState()
     }
 }
 
+// A bálarendelés mentése gomb eseménykezelője
 
+const save_BatchOrderButton = document.getElementById("save_BatchOrderButton");
 
+if (save_BatchOrderButton)
+{
+    save_BatchOrderButton.addEventListener('click', async function (event)
+    {
+        event.preventDefault();
 
+        const pine_type = Number(
+            document.getElementById('pine_type_dropdown').value
+        );
 
+        const batch_state = Number(
+            document.getElementById('batch_state_dropdown').value
+        );
 
+        const quantity = Number(
+            document.getElementById('number_of_pieces').value
+        );
 
+        try
+        {
+            // 1. Mentés az adatbázisba
+            const result = await RegisterNewPineBatchOrder(
+                pine_type,
+                batch_state,
+                quantity
+            );
 
+            console.log("Sikeres mentés:", result);
 
+            // 2. Újra lekérjük az adatbázisból az adatokat
+            await loadPineBatchData();
 
-// --------------------------------------------------------------------------
-// 2. FENYŐBÁLA ÉS KOSZORÚALAP OLDAL (Pinebase.html)
-// --------------------------------------------------------------------------
+            console.log("A táblázat frissítve!");
+        }
+        catch (error)
+        {
+            console.error("Hiba a rendelés mentésekor:", error);
+        }
 
-// Ezt a függvényt a Pinebase.html hívja meg a betöltéskor
-function loadPineData() {
-    const tableBody = document.getElementById('pineTableBody');
-    if (!tableBody) return; // Ha nem ezen az oldalon vagyunk, kilépünk
-
-    // Elkérjük az adatokat a szimulált adatbázisból (később majd a valódi MySQL-ből)
-    const pineData = apiGetPineData();
-    
-    // Töröljük a "Betöltés..." szöveget
-    tableBody.innerHTML = "";
-
-    // Végigmegyünk a tömbön, és minden sornál generálunk egy HTML <tr> sort
-    for (let i = 0; i < pineData.length; i++) {
-        const row = pineData[i];
-        const htmlSor = `
-            <tr>
-                <th class="text-start">${row.type}</th>
-                <td>${row.luc}</td>
-                <td>${row.jegenye}</td>
-                <td>${row.normand}</td>
-                <td>${row.nobilis}</td>
-            </tr>
-        `;
-        tableBody.innerHTML += htmlSor;
-    }
+        document.getElementById('pine_type_dropdown').value = null;
+        document.getElementById('batch_state_dropdown').value = null;
+        document.getElementById('number_of_pieces').value = null;
+    });
 }
 
+async function loadPineBatchData()
+{
+    const tableBody = document.getElementById('pineBatchTableBody');
 
-// Ezt a függvényt a Costumers.html hívja meg a betöltéskor
-function loadCostumersData() {
-    const tableBody = document.getElementById('CostumersTableBody');
-    if (!tableBody) return; // Ha nem ezen az oldalon vagyunk, kilépünk
-
-    // Elkérjük az adatokat a szimulált adatbázisból (később majd a valódi MySQL-ből)
-    const CostumersData = apiGetCostumersData();
-    
-    // Töröljük a "Betöltés..." szöveget
-    tableBody.innerHTML = "";
-
-    // Végigmegyünk a tömbön, és minden sornál generálunk egy HTML <tr> sort
-    for (let i = 0; i < CostumersData.length; i++) {
-        const row = CostumersData[i];
-        const htmlSor = `
-            <tr>
-                <th class="text-start">${row.type}</th>
-                <td>${row.luc}</td>
-                <td>${row.jegenye}</td>
-                <td>${row.normand}</td>
-                <td>${row.nobilis}</td>
-            </tr>
-        `;
-        tableBody.innerHTML += htmlSor;
-    }
-}
-
-
-
-function loadWreathData() {
-    const tableBody = document.getElementById('wreathTableBody');
     if (!tableBody) return;
 
-    const wreathData = apiGetWreathData();
-    tableBody.innerHTML = "";
+    try
+    {
+        const pineBatchData = await GetPineBatchOrder();
 
-    for (let i = 0; i < wreathData.length; i++) {
-        const row = wreathData[i];
-        
-        // Ha kész van (done == true), teszünk ki egy pipát, amúgy egy X-et
-        let keszJel = row.done ? "✅" : "❌";
+        tableBody.innerHTML = "";
 
-        const htmlSor = `
+        const states = {};
+
+        for (const order of pineBatchData)
+        {
+            const stateId = order.pinebatchStateId;
+
+            if (!states[stateId])
+            {
+                states[stateId] = {
+                    name: order.pinebatchState,
+                    luc: 0,
+                    jegenye: 0,
+                    normand: 0,
+                    nobilis: 0
+                };
+            }
+
+            const quantity = order.batchQuantity || 0;
+
+            switch (order.pineTypeId)
+            {
+                case 1:
+                    states[stateId].luc += quantity;
+                    break;
+
+                case 2:
+                    states[stateId].jegenye += quantity;
+                    break;
+
+                case 3:
+                    states[stateId].normand += quantity;
+                    break;
+
+                case 4:
+                    states[stateId].nobilis += quantity;
+                    break;
+            }
+        }
+
+        for (const stateId in states)
+        {
+            const state = states[stateId];
+
+            const htmlSor = `
+                <tr>
+                    <th>${state.name}</th>
+                    <td>${state.luc}</td>
+                    <td>${state.jegenye}</td>
+                    <td>${state.normand}</td>
+                    <td>${state.nobilis}</td>
+                </tr>
+            `;
+            tableBody.innerHTML += htmlSor;
+        }
+
+        const maradtSor = `
             <tr>
-                <td class="text-start fw-bold">${row.name}</td>
-                <td>${row.date}</td>
-                <td>${row.pinetype}</td>
-                <td>${row.size}</td>
-                <td>${keszJel}</td>
+                <th>Maradt</th>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+            </tr>
+            `;
+            tableBody.innerHTML += maradtSor;
+
+    }
+    catch (error)
+    {
+        console.error("Hiba az adatok betöltésekor:", error);
+
+        tableBody.innerHTML = `
+            <tr>
+                <td colspan="5">Hiba történt az adatok betöltésekor.</td>
             </tr>
         `;
-        tableBody.innerHTML += htmlSor;
     }
 }
 
-const resetDbBtn = document.getElementById('resetDbBtn');
-if (resetDbBtn) {
-    resetDbBtn.addEventListener('click', function() {
-        if (confirm("Biztosan visszaállítod az alap teszt adatokat? Minden módosításod elvész!")) {
-            apiResetDatabase();
-        }
-    });
+//  A koszorúalap fajták lekérdezése
+
+async function loadPineBaseTypes()
+{
+    try
+    {
+        const pineBasetypes = await getPineBaseTypes();
+        console.log(pineBasetypes);
+
+        const dropdown = document.getElementById("base_type_dropdown");
+
+        pineBasetypes.forEach(pinebasetype => 
+        {
+            const option = document.createElement("option");
+            option.value = pinebasetype.baseId;
+            option.textContent = pinebasetype.baseType;
+            dropdown.appendChild(option);
+        });
+    }
+    catch (error)
+    {
+        console.log("Hiba a fenyőalapok betöltésekor: ", error);
+    }
 }

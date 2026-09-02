@@ -5,10 +5,10 @@ namespace FlowerAPI.Models.DTO
     public class PinebatchOrderDTO
     {
         [Required]
-        public int? PineTypeId { get; set; }
+        public int PineTypeId { get; set; }
         [Required]
-        public int? PinebatchStateId { get; set; }
+        public int PinebatchStateId { get; set; }
         [Required]
-        public int? PineBatchQuantity { get; set; }
+        public int PineBatchQuantity { get; set; }
     }
 }

@@ -21,7 +21,6 @@
     <main class="container mb-5">
         <header class="text-center mb-4">
             <h2 class="display-6" style="color: var(--primary-color);">Fenyőbála készletnyilvántartás</h2>
-            <p class="text-muted">Az adatok az adatbázisból töltődnek be (jelenleg csak szimulálva a böngészőben).</p>
         </header>
 
         <!--  -->
@@ -52,7 +51,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <label class="new-order-label" for="batch_state">Állapot</label>
+                                            <label class="new-order-label">Állapot</label>
                                         </td>
                                         <td>
                                             <select id="batch_state_dropdown" class="form-control" name="treeState">
@@ -62,7 +61,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <label class="new-order-label" for="number_of_pieces">Darabszám:</label>
+                                            <label class="new-order-label">Darabszám:</label>
                                         </td>
                                         <td>
                                             <input id="number_of_pieces" class="form-control" type="number" name="darabszám">
@@ -70,7 +69,7 @@
                                     </tr>
                                     <tr>
                                         <td colspan="2">
-                                            <button class="btn btn-primary w-75">Mentés</button>
+                                            <button type="button" id="save_BatchOrderButton" class="btn btn-primary w-75">Mentés</button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -95,8 +94,7 @@
                                         <th>Nobilis</th>
                                     </tr>
                                 </thead>
-
-                                <tbody id="pineTableBody">
+                                <tbody id="pineBatchTableBody">
                                     <tr>
                                         <td colspan="5">Adatok betöltése folyamatban...</td>
                                     </tr>
@@ -114,7 +112,7 @@
     <script>
         // Amikor betölt az oldal, azonnal hívjuk meg a táblázat rajzoló funkciókat
         document.addEventListener('DOMContentLoaded', () => {
-            loadPineData();
+            loadPineBatchData();
             loadPineTypes();
             loadPineBatchState();
         });

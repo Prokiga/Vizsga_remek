@@ -26,8 +26,7 @@ namespace FlowerAPI.Controllers
                     {
                         u.BatchStateId,
                         u.BatchState
-                    })
-                    .ToListAsync();
+                    }).ToListAsync();
                 return Ok(pineBatchStates);
             }
             catch (Exception ex)
