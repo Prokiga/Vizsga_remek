@@ -149,9 +149,9 @@ if (save_BatchOrderButton)
             console.error("Hiba a rendelés mentésekor:", error);
         }
 
-        document.getElementById('pine_type_dropdown').value = null;
-        document.getElementById('batch_state_dropdown').value = null;
-        document.getElementById('number_of_pieces').value = null;
+        document.getElementById('pine_type_dropdown').value = "";
+        document.getElementById('batch_state_dropdown').value = "";
+        document.getElementById('number_of_pieces').value = "";
     });
 }
 
@@ -352,5 +352,32 @@ async function loadCostumersData()
                 <td colspan="6">Hiba történt az adatok betöltésekor.</td>
             </tr>
         `;
+    }
+}
+
+async function loadCostumersList()
+{
+    try {
+        const response = await fetch("https://localhost:7095/Costumer/List");
+
+        if (!response.ok) {
+            throw new Error("Nem sikerült lekérni a vevőket.");
+        }
+
+        const costumers = await response.json();
+
+        const dropdown = document.getElementById("costumer_select_dropdown");
+
+        costumers.forEach(costumer => {
+            const option = document.createElement("option");
+
+            option.value = costumer.costumerId;
+            option.textContent = costumer.costumerName;
+
+            dropdown.appendChild(option);
+        });
+    }
+    catch (error) {
+        console.error("Hiba a vevők betöltésekor:", error);
     }
 }

@@ -4,15 +4,18 @@ namespace FlowerAPI.Models.DTO
 {
     public class PinebaseOrderDTO
     {
-        [Required]
+        public int BaseId { get; set; }
+
         public int? CostumerId { get; set; }
-        [Required]
+
         public int? PineTypeId { get; set; }
-        [Required]
+
         public int? Pinebasetype { get; set; }
-        [Required]
-        public int? BatchQuantity { get; set; }
-        [Required]
-        public DateTime? BatchOrderedDate { get; set; }
+
+        public int? BaseQuantity { get; set; }
+
+        public bool? BaseState { get; set; }
+
+        public DateTime? BaseOrderedDate { get; set; }
     }
 }

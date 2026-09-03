@@ -230,7 +230,19 @@ async function GetAllCostumers()
 
     if (!response.ok)
     {
-        throw new Error("Nem sikerült a rendelési adatokat betölteni!");
+        throw new Error("Nem sikerült a vevői adatokat betölteni!");
+    }
+
+    return await response.json();
+}
+
+async function GetCostumersList()
+{
+    const response = await fetch('https://localhost:7095/Costumer/List');
+
+    if (!response.ok)
+    {
+        throw new Error("Nem sikerült a vevői adatokat betölteni!");
     }
 
     return await response.json();

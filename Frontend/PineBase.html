@@ -45,11 +45,8 @@
                                             <label class="new-order-label" for="costumer_name">Vásárló</label>
                                         </td>
                                         <td>
-                                            <select id="costumer_name" class="form-control" name="Vevő">
+                                            <select id="costumer_select_dropdown" class="form-control" name="Vevő">
                                                 <option value="">-- Válassz --</option>
-                                                <option value="">Kriszta</option>
-                                                <option value="">Géza</option>
-                                                <option value="">István</option>
 
                                             </select>
                                         </td>
@@ -117,8 +114,8 @@
                                         <th>Kész</th>
                                     </tr>
                                 </thead>
-                                <!-- Az id="wreathTableBody" segítségével a JS ide fogja betölteni az adatokat -->
-                                <tbody id="wreathTableBody">
+                                <!-- Az id="pineBaseTableBody" segítségével a JS ide fogja betölteni az adatokat -->
+                                <tbody id="pineBaseTableBody">
                                     <tr>
                                         <td colspan="5">Adatok betöltése folyamatban...</td>
                                     </tr>
@@ -137,6 +134,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             loadPineTypes();
             loadPineBaseTypes();
+            loadCostumersList();
         });
     </script>
 </body>

@@ -22,31 +22,39 @@ namespace FlowerAPI.Controllers
         {
             try
             {
+                if (pinebaseOrderDTO == null)
+                {
+                    return BadRequest(new
+                    {
+                        Message = "A fenyőalap rendelés adatai hiányoznak!"
+                    });
+                }
+
                 var pinebaseOrder = new PinebaseOrder
                 {
                     CostumerId = pinebaseOrderDTO.CostumerId,
                     PineTypeId = pinebaseOrderDTO.PineTypeId,
                     Pinebasetype = pinebaseOrderDTO.Pinebasetype,
-                    BaseQuantity = pinebaseOrderDTO.BatchQuantity,
-                    BaseOrderedDate = pinebaseOrderDTO.BatchOrderedDate,
+                    BaseQuantity = pinebaseOrderDTO.BaseQuantity,
+                    BaseOrderedDate = pinebaseOrderDTO.BaseOrderedDate,
+                    BaseState = pinebaseOrderDTO.BaseState
                 };
 
-                if (pinebaseOrderDTO != null)
-                {
+                await _szines_negy_evszak_context.PinebaseOrders.AddAsync(pinebaseOrder);
+                await _szines_negy_evszak_context.SaveChangesAsync();
 
-                    await _szines_negy_evszak_context.PinebaseOrders.AddAsync(pinebaseOrder);
-                    await _szines_negy_evszak_context.SaveChangesAsync();
-                    return Ok(new
-                    {
-                        Message = "A fenyőalap rendelést sikeresen rögzítettük",
-                        result = pinebaseOrder
-                    });
-                }
-                return BadRequest(new { Message = "A fenyőalap rendelést nem lehetett létrehozni!" });
+                return Ok(new
+                {
+                    Message = "A fenyőalap rendelést sikeresen rögzítettük",
+                    result = pinebaseOrder
+                });
             }
             catch (Exception ex)
             {
-                var realmessage = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
+                var realmessage = ex.InnerException != null
+                    ? ex.InnerException.Message
+                    : ex.Message;
+
                 return BadRequest(realmessage);
             }
         }

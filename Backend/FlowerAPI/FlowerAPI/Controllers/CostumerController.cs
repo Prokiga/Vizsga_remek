@@ -69,21 +69,19 @@ namespace FlowerAPI.Controllers
             }
         }
 
-        [HttpGet("{name}")]
-        public async Task<ActionResult> GetCostumerByName(string name)
+        [HttpGet("List")]
+        public async Task<ActionResult> GetCostumerList()
         {
             try
             {
-                var costumer = await _szinesNegyEvszakContext.Costumers.FirstOrDefaultAsync(c => c.CostumerName == name);
-                if (costumer == null)
-                {
-                    return NotFound(new { Message = "A vásárló nem található!" });
-                }
-                return Ok(new
-                {
-                    message = "Sikeres lekérdezés",
-                    result = costumer
-                });
+                var costumers = await _szinesNegyEvszakContext.Costumers
+                    .Select(c => new
+                    {
+                        c.CostumerId,
+                        c.CostumerName,
+                    })
+                    .ToListAsync();
+                return Ok(costumers);
             }
             catch (Exception ex)
             {
