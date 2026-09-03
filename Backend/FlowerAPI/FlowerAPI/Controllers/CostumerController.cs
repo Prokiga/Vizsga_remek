@@ -29,7 +29,7 @@ namespace FlowerAPI.Controllers
                     CostumerPhonenumber = createCostumersDTO.CostumerPhonenumber,
                     CostumerPostalCode = createCostumersDTO.CostumerPostalCode,
                     CostumerCity = createCostumersDTO.CostumerCity,
-                    CostumerAddress =createCostumersDTO.CostumerAddress
+                    CostumerAddress = createCostumersDTO.CostumerAddress
                 };
 
                 if (costumer != null)

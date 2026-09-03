@@ -21,7 +21,6 @@
     <main class="container mb-5">
         <header class="text-center mb-4">
             <h2 class="display-6" style="color: var(--primary-color);">Vásárlók</h2>
-            <p class="text-muted">Az adatok az adatbázisból töltődnek be (jelenleg csak szimulálva a böngészőben).</p>
         </header>
         <!-- KOSZORÚALAP SZEKCIÓ -->
         <div class="container-fluid mb-5">
@@ -43,7 +42,7 @@
                                 <tbody>
                                     <tr>
                                         <td>
-                                            <label class="new-order-label" for="costumer_name">Név:</label>
+                                            <label class="new-order-label">Név:</label>
                                         </td>
                                         <td>
                                             <input id="costumer_name" class="form-control" type="text" name="A vevő neve">
@@ -51,7 +50,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <label class="new-order-label" for="costumer_postal_code">Irányítószám:</label>
+                                            <label class="new-order-label">Irányítószám:</label>
                                         </td>
                                         <td>
                                             <input id="costumer_postal_code" class="form-control" type="text" name="Irányítószám">
@@ -60,7 +59,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <label class="new-order-label" for="costumer_city">Város:</label>
+                                            <label class="new-order-label">Város:</label>
                                         </td>
                                         <td>
                                             <input id="costumer_city" class="form-control" type="text" name="Város">
@@ -68,7 +67,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <label class="new-order-label" for="costumer_address">Cím:</label>
+                                            <label class="new-order-label">Cím:</label>
                                         </td>
                                         <td>
                                             <input id="costumer_address" class="form-control" type="text" name="Cím">
@@ -76,7 +75,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <label class="new-order-label" for="costumer_phonenumber">Telefonszám:</label>
+                                            <label class="new-order-label">Telefonszám:</label>
                                         </td>
                                         <td>
                                             <input id="costumer_phonenumber" class="form-control" type="text" name="Telefonszám">
@@ -84,7 +83,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <label class="new-order-label" for="costumer_taxnumber">Adószám:</label>
+                                            <label class="new-order-label">Adószám:</label>
                                         </td>
                                         <td>
                                             <input id="costumer_taxnumber" class="form-control" type="text" name="A vevő adószáma">
@@ -92,7 +91,7 @@
                                     </tr>
                                     <tr>
                                         <td colspan="2">
-                                            <button class="btn btn-primary w-75">Mentés</button>
+                                            <button type="button" id="save_NewCostumerButton" class="btn btn-primary w-75">Mentés</button>
                                         </td>
                                     </tr>
                                 </tbody>

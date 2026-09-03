@@ -123,34 +123,20 @@ async function loadPineBatchState()
 // A bálarendelés mentése gomb eseménykezelője
 
 const save_BatchOrderButton = document.getElementById("save_BatchOrderButton");
-
 if (save_BatchOrderButton)
 {
     save_BatchOrderButton.addEventListener('click', async function (event)
     {
         event.preventDefault();
 
-        const pine_type = Number(
-            document.getElementById('pine_type_dropdown').value
-        );
-
-        const batch_state = Number(
-            document.getElementById('batch_state_dropdown').value
-        );
-
-        const quantity = Number(
-            document.getElementById('number_of_pieces').value
-        );
+        const pine_type = Number(document.getElementById('pine_type_dropdown').value);
+        const batch_state = Number(document.getElementById('batch_state_dropdown').value);
+        const quantity = Number(document.getElementById('number_of_pieces').value);
 
         try
         {
             // 1. Mentés az adatbázisba
-            const result = await RegisterNewPineBatchOrder(
-                pine_type,
-                batch_state,
-                quantity
-            );
-
+            const result = await RegisterNewPineBatchOrder(pine_type, batch_state, quantity);
             console.log("Sikeres mentés:", result);
 
             // 2. Újra lekérjük az adatbázisból az adatokat
@@ -168,6 +154,8 @@ if (save_BatchOrderButton)
         document.getElementById('number_of_pieces').value = null;
     });
 }
+
+// A fenyőbálák adatainak letöltése az adatbázisból
 
 async function loadPineBatchData()
 {
@@ -282,5 +270,87 @@ async function loadPineBaseTypes()
     catch (error)
     {
         console.log("Hiba a fenyőalapok betöltésekor: ", error);
+    }
+}
+
+// Új vevő hozzáadása az adatbázishoz
+
+const save_NewCostumerButton = document.getElementById("save_NewCostumerButton");
+if (save_NewCostumerButton)
+{
+    save_NewCostumerButton.addEventListener('click', async function (event)
+    {
+        event.preventDefault();
+        
+        const costumer_name = document.getElementById('costumer_name').value;
+        const costumer_postal_code = document.getElementById('costumer_postal_code').value;
+        const costumer_city = document.getElementById('costumer_city').value;
+        const costumer_address = document.getElementById('costumer_address').value;
+        const costumer_phonenumber = document.getElementById('costumer_phonenumber').value;
+        const costumer_taxnumber = document.getElementById('costumer_taxnumber').value;
+
+        try
+        {
+            // 1. Mentés az adatbázisba
+            const result = await RegisterNewCostumer(costumer_name, costumer_postal_code, costumer_city, costumer_address, costumer_phonenumber, costumer_taxnumber);
+            console.log("Sikeres mentés:", result);
+
+            // 2. Újra lekérjük az adatbázisból az adatokat
+            await loadCostumersData();
+            console.log("A táblázat frissítve!");
+        }
+        catch (error)
+        {
+            console.error("Hiba a rendelés mentésekor:", error);
+        }
+
+        document.getElementById('costumer_name').value = "";
+        document.getElementById('costumer_postal_code').value = "";
+        document.getElementById('costumer_city').value = "";
+        document.getElementById('costumer_address').value = "";
+        document.getElementById('costumer_phonenumber').value = "";
+        document.getElementById('costumer_taxnumber').value = "";
+    });
+}
+
+// A fenyőbálák adatainak letöltése az adatbázisból
+
+async function loadCostumersData()
+{
+    const costumerstableBody = document.getElementById('costumersTableBody');
+
+    if (!costumerstableBody) return;
+
+    try
+    {
+        const costumersData = await GetAllCostumers();
+
+        costumerstableBody.innerHTML = "";
+
+        for (const data of costumersData.data)
+        {
+            const htmlSor = `
+                <tr>
+                    <td>${data.costumerName}</td>
+                    <td>${data.costumerPostalCode}</td>
+                    <td>${data.costumerCity}</td>
+                    <td>${data.costumerAddress}</td>
+                    <td>${data.costumerPhonenumber}</td>
+                    <td>${data.costumerTaxnumber}</td>
+                </tr>
+            `;
+
+            costumerstableBody.innerHTML += htmlSor;
+        }
+    }
+    catch (error)
+    {
+        console.error("Hiba az adatok betöltésekor:", error);
+
+        costumerstableBody.innerHTML = `
+            <tr>
+                <td colspan="6">Hiba történt az adatok betöltésekor.</td>
+            </tr>
+        `;
     }
 }

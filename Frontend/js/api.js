@@ -112,7 +112,7 @@ async function GetPineBatchStates()
 }
 
 // --------------------------------------------------------------------------
-// A bálarendelés mentése gomb adatbázisból való letöltése
+// A bálarendelés adatainak letöltése
 // --------------------------------------------------------------------------
 
 async function GetPineBatchOrder()
@@ -128,7 +128,7 @@ async function GetPineBatchOrder()
 }
 
 // --------------------------------------------------------------------------
-// A bálarendelés mentése gomb adatbázisból való letöltése
+// A bálarendelés mentése az adatbázisba
 // --------------------------------------------------------------------------
 
 async function RegisterNewPineBatchOrder(pine_type, batch_state, quantity)
@@ -179,6 +179,58 @@ async function getPineBaseTypes()
     if (!response.ok)
     {
         throw new Error("Nem sikerült a koszorúalap méreteket betölteni!");
+    }
+
+    return await response.json();
+}
+
+async function RegisterNewCostumer(costumer_name, costumer_postal_code, costumer_city, costumer_address, costumer_phonenumber, costumer_taxnumber)
+{
+    try
+    {
+        const response = await fetch(
+            'https://localhost:7095/Costumer',
+        {
+            method: 'POST',
+            headers:
+            {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(
+                {
+                    CostumerName: costumer_name,
+                    CostumerTaxnumber: costumer_taxnumber,
+                    CostumerPhonenumber: costumer_phonenumber,
+                    CostumerPostalCode: costumer_postal_code,
+                    CostumerCity: costumer_city,
+                    CostumerAddress: costumer_address
+                })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) 
+        {
+            throw new Error(
+                data.message || data.Message || "A rendelés rögzítése sikertelen!"
+            );
+        }
+        return data;
+    } 
+    catch (error)
+    {
+        console.log('Adatbázis hiba: ', error);
+        throw error;
+    }
+}
+
+async function GetAllCostumers()
+{
+    const response = await fetch("https://localhost:7095/Costumer");
+
+    if (!response.ok)
+    {
+        throw new Error("Nem sikerült a rendelési adatokat betölteni!");
     }
 
     return await response.json();
