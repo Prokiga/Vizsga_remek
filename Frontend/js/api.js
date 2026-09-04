@@ -1,9 +1,3 @@
-// --- ADATBÁZIS FÜGGVÉNYEK (Valódi lekérések) ---
-
-// --------------------------------------------------------------------------
-// 1. BEJELENTKEZÉS OLDAL (index.html)
-// --------------------------------------------------------------------------
-
 async function login(username, password)
 {
     try
@@ -40,10 +34,6 @@ async function login(username, password)
     }    
 }
 
-// --------------------------------------------------------------------------
-// 1. REGISZTRÁCIÓ (index.html)
-// --------------------------------------------------------------------------
-
 async function registerNewUser(username, password)
 {
     try
@@ -79,10 +69,6 @@ async function registerNewUser(username, password)
     }    
 }
 
-// --------------------------------------------------------------------------
-// A fenyőtípusok neveinek és betöltése a dropdownlist-be.
-// --------------------------------------------------------------------------
-
 async function getPineTypes() 
 {
     const response = await fetch("https://localhost:7095/Pinetype");
@@ -94,10 +80,6 @@ async function getPineTypes()
 
     return await response.json();
 }
-
-// --------------------------------------------------------------------------
-// A fenyőbálák állapotainak betöltése a dropdownlist-be.
-// --------------------------------------------------------------------------
 
 async function GetPineBatchStates()
 {
@@ -111,10 +93,6 @@ async function GetPineBatchStates()
     return await response.json();
 }
 
-// --------------------------------------------------------------------------
-// A bálarendelés adatainak letöltése
-// --------------------------------------------------------------------------
-
 async function GetPineBatchOrder()
 {
     const response = await fetch("https://localhost:7095/PinebatchOrder");
@@ -126,10 +104,6 @@ async function GetPineBatchOrder()
 
     return await response.json();
 }
-
-// --------------------------------------------------------------------------
-// A bálarendelés mentése az adatbázisba
-// --------------------------------------------------------------------------
 
 async function RegisterNewPineBatchOrder(pine_type, batch_state, quantity)
 {
@@ -167,10 +141,6 @@ async function RegisterNewPineBatchOrder(pine_type, batch_state, quantity)
         throw error;
     }
 }
-
-// --------------------------------------------------------------------------
-// A fenyőalap méretek betöltése a dropdownlist-be.
-// --------------------------------------------------------------------------
 
 async function getPineBaseTypes() 
 {
@@ -246,4 +216,70 @@ async function GetCostumersList()
     }
 
     return await response.json();
+}
+
+async function RegisterNewPinebaseOrder(costumerId, pineTypeId, pinebasetype, baseQuantity, baseOrderedDate, baseState)
+{
+    try
+    {
+        const response = await fetch(
+            'https://localhost:7095/PinebaseOrder',
+        {
+            method: 'POST',
+            headers:
+            {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(
+                {
+                    CostumerId : costumerId,
+                    PineTypeId : pineTypeId,
+                    Pinebasetype : pinebasetype,
+                    BaseQuantity : baseQuantity,
+                    BaseOrderedDate : baseOrderedDate,
+                    BaseState : baseState
+                })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) 
+        {
+            throw new Error(
+                data.message || data.Message || "A rendelés rögzítése sikertelen!"
+            );
+        }
+        return data;
+    } 
+    catch (error)
+    {
+        console.log('Adatbázis hiba: ', error);
+        throw error;
+    }
+}
+
+async function GetAllPinebaseOrders()
+{
+    try
+    {
+        const response = await fetch(
+            'https://localhost:7095/PinebaseOrder'
+        );
+
+        const data = await response.json();
+
+        if (!response.ok)
+        {
+            throw new Error(
+                data.message || data.Message || "A rendelések lekérése sikertelen!"
+            );
+        }
+
+        return data;
+    }
+    catch (error)
+    {
+        console.error("Hiba a rendelések lekérésekor:", error);
+        throw error;
+    }
 }

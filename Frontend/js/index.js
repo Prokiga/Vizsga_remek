@@ -11,8 +11,10 @@ if (logoutBtn) {
     });
 }
 
+
+
 // --------------------------------------------------------------------------
-// 1. BEJELENTKEZÉS OLDAL (index.html)
+// 1. BEJELENTKEZÉS (index.html)
 // --------------------------------------------------------------------------
 const loginForm = document.getElementById('loginForm');
 if (loginForm) {
@@ -41,7 +43,7 @@ if (loginForm) {
 }
 
 // --------------------------------------------------------------------------
-// 1. REGISZTRÁCIÓ (index.html)
+// 2. REGISZTRÁCIÓ (index.html)
 // --------------------------------------------------------------------------
 const registryButton = document.getElementById('registryButton');
 if (registryButton) {
@@ -71,11 +73,10 @@ if (registryButton) {
 }
 
 // --------------------------------------------------------------------------
-// 2. FENYŐBÁLA OLDAL (PineBatch.html)
+// 3. FENYŐBÁLA (PineBatch.html)
 // --------------------------------------------------------------------------
 
-//  A fenyőfajták lekérdezése
-
+//  A fenyőfajták lekérdezése a legördülő listához. Ezt még a PineBase oldal is használja
 async function loadPineTypes()
 {
     try
@@ -97,8 +98,7 @@ async function loadPineTypes()
     }
 }
 
-// A fenyőbálák állapotának lekérdezése
-
+// A fenyőbálák állapotának lekérdezése a legördülő listához
 async function loadPineBatchState()
 {
     try
@@ -121,7 +121,6 @@ async function loadPineBatchState()
 }
 
 // A bálarendelés mentése gomb eseménykezelője
-
 const save_BatchOrderButton = document.getElementById("save_BatchOrderButton");
 if (save_BatchOrderButton)
 {
@@ -155,8 +154,7 @@ if (save_BatchOrderButton)
     });
 }
 
-// A fenyőbálák adatainak letöltése az adatbázisból
-
+// A fenyőbálák adatainak letöltése az adatbázisból, hogy a táblázatban megjelenjen.
 async function loadPineBatchData()
 {
     const tableBody = document.getElementById('pineBatchTableBody');
@@ -248,8 +246,12 @@ async function loadPineBatchData()
     }
 }
 
-//  A koszorúalap fajták lekérdezése
 
+// --------------------------------------------------------------------------
+// 4. Koszorúalap (PineBase.html)
+// --------------------------------------------------------------------------
+
+//  A koszorúalap fajták lekérdezése a legördülő listához
 async function loadPineBaseTypes()
 {
     try
@@ -273,8 +275,128 @@ async function loadPineBaseTypes()
     }
 }
 
-// Új vevő hozzáadása az adatbázishoz
+async function loadCostumersList()
+{
+    try {
+        const response = await fetch("https://localhost:7095/Costumer/List");
 
+        if (!response.ok) {
+            throw new Error("Nem sikerült lekérni a vevőket.");
+        }
+
+        const costumers = await response.json();
+
+        const dropdown = document.getElementById("costumer_select_dropdown");
+
+        costumers.forEach(costumer => {
+            const option = document.createElement("option");
+
+            option.value = costumer.costumerId;
+            option.textContent = costumer.costumerName;
+
+            dropdown.appendChild(option);
+        });
+    }
+    catch (error) {
+        console.error("Hiba a vevők betöltésekor:", error);
+    }
+}
+
+// Új koszorúalap rendelés hozzáadása az adatbázishoz
+const save_NewPineBaseButton = document.getElementById('save_NewPineBaseButton');
+if (save_NewPineBaseButton)
+{
+    save_NewPineBaseButton.addEventListener('click', async function (event)
+    {
+        event.preventDefault();
+
+        const costumerId = Number(document.getElementById('costumer_select_dropdown').value);
+        const pineTypeId = Number(document.getElementById('pine_type_dropdown').value);
+        const pinebasetype = document.getElementById('base_type_dropdown').value;
+        const baseQuantity = Number(document.getElementById('number_of_pieces').value);
+        const baseOrderedDate = document.getElementById('deadline').value;
+        const baseState = false;
+
+        try
+        {
+            // 1. Mentés az adatbázisba
+            const result = await RegisterNewPinebaseOrder(costumerId, pineTypeId, pinebasetype, baseQuantity, baseOrderedDate, baseState);
+            console.log("Sikeres mentés:", result);
+            
+            // 2. Újra lekérjük az adatbázisból az adatokat
+            await loadPinebaseOrders();
+            console.log("A táblázat frissítve!");
+        }
+
+        catch (error)
+        {
+            console.error("Hiba a rendelés mentésekor:", error);
+        }
+    })
+}
+
+// A koszorúalap rendelések listájának megjelenítése
+async function loadPinebaseOrders()
+{
+    try
+    {
+        const pineBaseOrders = await GetAllPinebaseOrders();
+
+        const tableBody = document.getElementById('pineBaseTableBody');
+
+        tableBody.innerHTML = '';
+
+        pineBaseOrders.forEach(order =>
+        {
+            const row = document.createElement('tr');
+
+            const orderedDate = order.baseOrderedDate
+                ? new Date(order.baseOrderedDate).toLocaleDateString('hu-HU')
+                : '-';
+
+            row.innerHTML = `
+                <td>${order.costumerName ?? '-'}</td>
+
+                <td>${orderedDate}</td>
+
+                <td>${order.pineType ?? '-'}</td>
+
+                <td>${order.baseType ?? '-'}</td>
+
+                <td>
+                    <input 
+                        type="checkbox"
+                        ${order.baseState ? 'checked' : ''}
+                        disabled
+                    >
+                </td>
+            `;
+
+            tableBody.appendChild(row);
+        });
+    }
+    catch (error)
+    {
+        console.error("Hiba a táblázat betöltésekor:", error);
+
+        const tableBody = document.getElementById('pineBaseTableBody');
+
+        tableBody.innerHTML = `
+            <tr>
+                <td colspan="5">
+                    Hiba történt az adatok betöltésekor.
+                </td>
+            </tr>
+        `;
+    }
+}
+
+
+// --------------------------------------------------------------------------
+// 4. Vásárlók (Costumers.html)
+// --------------------------------------------------------------------------
+
+// Új vevő hozzáadása az adatbázishoz
 const save_NewCostumerButton = document.getElementById("save_NewCostumerButton");
 if (save_NewCostumerButton)
 {
@@ -288,13 +410,13 @@ if (save_NewCostumerButton)
         const costumer_address = document.getElementById('costumer_address').value;
         const costumer_phonenumber = document.getElementById('costumer_phonenumber').value;
         const costumer_taxnumber = document.getElementById('costumer_taxnumber').value;
-
+        
         try
         {
             // 1. Mentés az adatbázisba
             const result = await RegisterNewCostumer(costumer_name, costumer_postal_code, costumer_city, costumer_address, costumer_phonenumber, costumer_taxnumber);
             console.log("Sikeres mentés:", result);
-
+            
             // 2. Újra lekérjük az adatbázisból az adatokat
             await loadCostumersData();
             console.log("A táblázat frissítve!");
@@ -312,13 +434,11 @@ if (save_NewCostumerButton)
         document.getElementById('costumer_taxnumber').value = "";
     });
 }
-
-// A fenyőbálák adatainak letöltése az adatbázisból
-
+// A vevők listájának megjelenítése
 async function loadCostumersData()
 {
     const costumerstableBody = document.getElementById('costumersTableBody');
-
+    
     if (!costumerstableBody) return;
 
     try
@@ -352,32 +472,5 @@ async function loadCostumersData()
                 <td colspan="6">Hiba történt az adatok betöltésekor.</td>
             </tr>
         `;
-    }
-}
-
-async function loadCostumersList()
-{
-    try {
-        const response = await fetch("https://localhost:7095/Costumer/List");
-
-        if (!response.ok) {
-            throw new Error("Nem sikerült lekérni a vevőket.");
-        }
-
-        const costumers = await response.json();
-
-        const dropdown = document.getElementById("costumer_select_dropdown");
-
-        costumers.forEach(costumer => {
-            const option = document.createElement("option");
-
-            option.value = costumer.costumerId;
-            option.textContent = costumer.costumerName;
-
-            dropdown.appendChild(option);
-        });
-    }
-    catch (error) {
-        console.error("Hiba a vevők betöltésekor:", error);
     }
 }

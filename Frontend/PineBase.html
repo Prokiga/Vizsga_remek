@@ -47,7 +47,6 @@
                                         <td>
                                             <select id="costumer_select_dropdown" class="form-control" name="Vevő">
                                                 <option value="">-- Válassz --</option>
-
                                             </select>
                                         </td>
                                     </tr>
@@ -89,7 +88,7 @@
                                     </tr>
                                     <tr>
                                         <td colspan="2">
-                                            <button class="btn btn-primary w-75">Mentés</button>
+                                            <button type="button" id="save_NewPineBaseButton" class="btn btn-primary w-75">Mentés</button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -135,6 +134,7 @@
             loadPineTypes();
             loadPineBaseTypes();
             loadCostumersList();
+            loadPinebaseOrders();
         });
     </script>
 </body>
