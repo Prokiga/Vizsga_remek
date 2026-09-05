@@ -374,11 +374,49 @@ async function loadPinebaseOrders()
             `;
 
             const checkbox = row.querySelector('input[type="checkbox"]');
+
             // Ha készen van, akkor legyen szürke és áthúzott
             if (checkbox.checked)
             {
                 row.classList.add('order-completed');
             }
+
+            // Checkbox állapotának megváltozása
+            checkbox.addEventListener('change', async function()
+            {
+                const newState = this.checked;
+
+                // Azonnal változtatjuk a sor kinézetét
+                row.classList.toggle('order-completed', newState);
+
+                try
+                {
+                    await UpdatePinebaseOrderState(
+                        order.baseId,
+                        newState
+                    );
+
+                    console.log(
+                        `A ${order.baseId} azonosítójú rendelés állapota frissítve: ${newState}`
+                    );
+                }
+                catch (error)
+                {
+                    console.error(
+                        "Nem sikerült frissíteni a rendelés állapotát:",
+                        error
+                    );
+
+                    // Ha az adatbázis frissítése sikertelen,
+                    // visszaállítjuk az eredeti állapotot
+                    this.checked = !newState;
+
+                    row.classList.toggle(
+                        'order-completed',
+                        this.checked
+                    );
+                }
+            });
 
             tableBody.appendChild(row);
         });

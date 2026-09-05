@@ -275,7 +275,7 @@ async function GetAllPinebaseOrders()
             );
         }
 
-        return data.result;
+        return data;
     }
     catch (error)
     {

@@ -100,28 +100,6 @@ namespace FlowerAPI.Controllers
             }
         }
 
-        [HttpGet("{BaseId}")]
-        public async Task<ActionResult> GetPinebaseOrderById(int BaseId)
-        {
-            try
-            {
-                var pinebaseOrder = await _szines_negy_evszak_context.PinebaseOrders.FirstOrDefaultAsync(p => p.BaseId == BaseId);
-                if (pinebaseOrder == null)
-                {
-                    return NotFound(new { Message = "A fenyőalap rendelés nem található!" });
-                }
-                return Ok(new
-                {
-                    message = "Sikeres lekérdezés",
-                    result = pinebaseOrder
-                });
-            }
-            catch (Exception ex)
-            {
-                var realmessage = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
-                return BadRequest(realmessage);
-            }
-        }
 
         [HttpPut("UpdateState/{baseId}")]
         public async Task<ActionResult> UpdatePinebaseOrderState(int baseId, [FromBody] bool state)
