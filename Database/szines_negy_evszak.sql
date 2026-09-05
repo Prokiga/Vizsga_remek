@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1:3306
--- Létrehozás ideje: 2026. Aug 27. 15:07
+-- Létrehozás ideje: 2026. Sze 05. 18:16
 -- Kiszolgáló verziója: 8.4.7
 -- PHP verzió: 8.3.28
 
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `costumers` (
   `costumer_address` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `costumer_phonenumber` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`costumer_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -50,7 +50,15 @@ CREATE TABLE IF NOT EXISTS `pinebasetype` (
   `base_id` int NOT NULL AUTO_INCREMENT,
   `base_type` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`base_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- A tábla adatainak kiíratása `pinebasetype`
+--
+
+INSERT INTO `pinebasetype` (`base_id`, `base_type`) VALUES
+(1, 'Kicsi'),
+(2, 'Nagy');
 
 -- --------------------------------------------------------
 
@@ -72,7 +80,7 @@ CREATE TABLE IF NOT EXISTS `pinebase_order` (
   KEY `fk_costumer_id` (`costumer_id`),
   KEY `fk_pinebase_pinetype` (`pine_type_id`),
   KEY `fk_pinebasetype` (`pinebasetype`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -83,9 +91,20 @@ CREATE TABLE IF NOT EXISTS `pinebase_order` (
 DROP TABLE IF EXISTS `pinebatchstate`;
 CREATE TABLE IF NOT EXISTS `pinebatchstate` (
   `batch_state_id` int NOT NULL AUTO_INCREMENT,
-  `batch_state` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `batch_state` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`batch_state_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- A tábla adatainak kiíratása `pinebatchstate`
+--
+
+INSERT INTO `pinebatchstate` (`batch_state_id`, `batch_state`) VALUES
+(1, 'Érkezett'),
+(2, 'Kiszállítva'),
+(3, 'Eladva'),
+(4, 'Lekötve'),
+(5, 'Eltéve');
 
 -- --------------------------------------------------------
 
@@ -104,7 +123,7 @@ CREATE TABLE IF NOT EXISTS `pinebatch_order` (
   PRIMARY KEY (`batch_id`),
   KEY `fk_pinebatch_pinetype` (`pine_type_id`),
   KEY `fk_pinebatch_state_id` (`pinebatch_state_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -117,7 +136,17 @@ CREATE TABLE IF NOT EXISTS `pinetypes` (
   `pine_id` int NOT NULL AUTO_INCREMENT,
   `pine_type` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`pine_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- A tábla adatainak kiíratása `pinetypes`
+--
+
+INSERT INTO `pinetypes` (`pine_id`, `pine_type`) VALUES
+(1, 'Luc'),
+(2, 'Jegenye'),
+(3, 'Normand'),
+(4, 'Nobilis');
 
 -- --------------------------------------------------------
 
@@ -131,7 +160,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `user_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `pass_word` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Megkötések a kiírt táblákhoz
