@@ -169,6 +169,7 @@ async function loadPineBatchData()
 
         const states = {};
 
+        // Adatok csoportosítása állapot és fenyőtípus alapján
         for (const order of pineBatchData)
         {
             const stateId = order.pinebatchStateId;
@@ -206,6 +207,30 @@ async function loadPineBatchData()
             }
         }
 
+        // Az "Érkezett" állapot ID-ja
+        const erkezettStateId = 1;
+
+        // Érkezett mennyiségek lekérése
+        const erkezett = states[erkezettStateId];
+
+        let maradekLuc = erkezett ? erkezett.luc : 0;
+        let maradekJegenye = erkezett ? erkezett.jegenye : 0;
+        let maradekNormand = erkezett ? erkezett.normand : 0;
+        let maradekNobilis = erkezett ? erkezett.nobilis : 0;
+
+        // Az összes többi állapot kivonása
+        for (const stateId in states)
+        {
+            if (Number(stateId) !== erkezettStateId)
+            {
+                maradekLuc -= states[stateId].luc;
+                maradekJegenye -= states[stateId].jegenye;
+                maradekNormand -= states[stateId].normand;
+                maradekNobilis -= states[stateId].nobilis;
+            }
+        }
+
+        // Állapotok megjelenítése a táblázatban
         for (const stateId in states)
         {
             const state = states[stateId];
@@ -219,20 +244,22 @@ async function loadPineBatchData()
                     <td>${state.nobilis}</td>
                 </tr>
             `;
+
             tableBody.innerHTML += htmlSor;
         }
 
+        // Maradt sor megjelenítése
         const maradtSor = `
             <tr>
                 <th>Maradt</th>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
+                <td>${maradekLuc}</td>
+                <td>${maradekJegenye}</td>
+                <td>${maradekNormand}</td>
+                <td>${maradekNobilis}</td>
             </tr>
-            `;
-            tableBody.innerHTML += maradtSor;
+        `;
 
+        tableBody.innerHTML += maradtSor;
     }
     catch (error)
     {
@@ -245,6 +272,7 @@ async function loadPineBatchData()
         `;
     }
 }
+
 
 
 // --------------------------------------------------------------------------
