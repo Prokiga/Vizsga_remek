@@ -131,3 +131,8 @@ header img {
     font-weight: bold;
     cursor: text;
 }
+
+.order-completed td {
+    color: #888;
+    text-decoration: line-through;
+}

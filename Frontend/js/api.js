@@ -275,11 +275,51 @@ async function GetAllPinebaseOrders()
             );
         }
 
-        return data;
+        return data.result;
     }
     catch (error)
     {
         console.error("Hiba a rendelések lekérésekor:", error);
+        throw error;
+    }
+}
+
+async function UpdatePinebaseOrderState(baseId, baseState)
+{
+    try
+    {
+        const response = await fetch(
+            `https://localhost:7095/PinebaseOrder/UpdateState/${baseId}`,
+            {
+                method: 'PUT',
+                headers:
+                {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(baseState)
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok)
+        {
+            throw new Error(
+                data.message ||
+                data.Message ||
+                "A rendelés állapotának módosítása sikertelen!"
+            );
+        }
+
+        return data;
+    }
+    catch (error)
+    {
+        console.error(
+            "Hiba a rendelés állapotának módosításakor:",
+            error
+        );
+
         throw error;
     }
 }

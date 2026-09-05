@@ -82,6 +82,8 @@ namespace FlowerAPI.Controllers
                             ? p.PinebasetypeNavigation.BaseType
                             : "Ismeretlen alap típus",
 
+                        p.BaseQuantity,
+
                         p.BaseState
                     })
                     .ToListAsync();
@@ -117,6 +119,42 @@ namespace FlowerAPI.Controllers
             catch (Exception ex)
             {
                 var realmessage = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
+                return BadRequest(realmessage);
+            }
+        }
+
+        [HttpPut("UpdateState/{baseId}")]
+        public async Task<ActionResult> UpdatePinebaseOrderState(int baseId, [FromBody] bool state)
+        {
+            try
+            {
+                var order = await _szines_negy_evszak_context.PinebaseOrders
+                    .FirstOrDefaultAsync(o => o.BaseId == baseId);
+
+                if (order == null)
+                {
+                    return NotFound(new
+                    {
+                        Message = "A rendelés nem található!"
+                    });
+                }
+
+                order.BaseState = state;
+
+                await _szines_negy_evszak_context.SaveChangesAsync();
+
+                return Ok(new
+                {
+                    Message = "A rendelés állapota sikeresen módosítva!",
+                    BaseState = order.BaseState
+                });
+            }
+            catch (Exception ex)
+            {
+                var realmessage = ex.InnerException != null
+                    ? ex.InnerException.Message
+                    : ex.Message;
+
                 return BadRequest(realmessage);
             }
         }
