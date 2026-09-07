@@ -465,45 +465,6 @@ async function loadPinebaseOrders()
     }
 }
 
-checkbox.addEventListener('change', async function()
-{
-    const newState = this.checked;
-
-    row.classList.toggle('order-completed', newState);
-
-    try
-    {
-        const response = await fetch(
-            `https://localhost:7095/PinebaseOrder/UpdateState/${order.baseId}`,
-            {
-                method: 'PUT',
-                headers:
-                {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(newState)
-            }
-        );
-
-        if (!response.ok)
-        {
-            throw new Error("Nem sikerült frissíteni a rendelés állapotát.");
-        }
-
-        console.log("Rendelés állapota frissítve:", newState);
-    }
-    catch (error)
-    {
-        console.error("Hiba a rendelés állapotának frissítésekor:", error);
-
-        // Ha nem sikerült az adatbázis frissítése,
-        // visszaállítjuk a checkbox eredeti állapotát
-        this.checked = !newState;
-
-        row.classList.toggle('order-completed', this.checked);
-    }
-});
-
 // --------------------------------------------------------------------------
 // 4. Vásárlók (Costumers.html)
 // --------------------------------------------------------------------------
