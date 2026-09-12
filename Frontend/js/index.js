@@ -11,8 +11,6 @@ if (logoutBtn) {
     });
 }
 
-
-
 // --------------------------------------------------------------------------
 // 1. BEJELENTKEZÉS (index.html)
 // --------------------------------------------------------------------------
@@ -31,7 +29,7 @@ if (loginForm) {
 
         try
         {
-            const result = await login(user, pass);
+            const result = await Login(user, pass);
             console.log('Sikeres bejelentkezés: ', result);
             window.location.href = "Options.html";
         } catch (error)
@@ -60,7 +58,7 @@ if (registryButton) {
 
         try
         {
-            const result = await registerNewUser(user, pass);
+            const result = await RegisterNewUser(user, pass);
             document.getElementById('loginError').textContent = "Sikeres regisztráció.";
         }
         catch (error)
@@ -81,7 +79,7 @@ async function loadPineTypes()
 {
     try
     {
-        const pinetypes = await getPineTypes();
+        const pinetypes = await GetPineTypes();
         const dropdown = document.getElementById("pine_type_dropdown");
 
         pinetypes.forEach(pinetype => 
@@ -272,8 +270,6 @@ async function loadPineBatchData()
         `;
     }
 }
-
-
 
 // --------------------------------------------------------------------------
 // 4. Koszorúalap (PineBase.html)

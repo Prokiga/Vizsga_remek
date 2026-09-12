@@ -1,4 +1,4 @@
-async function login(username, password)
+async function Login(username, password)
 {
     try
     {
@@ -34,7 +34,7 @@ async function login(username, password)
     }    
 }
 
-async function registerNewUser(username, password)
+async function RegisterNewUser(username, password)
 {
     try
     {
@@ -64,12 +64,12 @@ async function registerNewUser(username, password)
     } 
     catch (error)
     {
-        console.log('Regisztrációs hiba: ', error);
+        console.log('Adatbázis hiba: ', error);
         throw error;
     }    
 }
 
-async function getPineTypes() 
+async function GetPineTypes() 
 {
     const response = await fetch("https://localhost:7095/Pinetype");
 

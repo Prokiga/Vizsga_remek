@@ -90,6 +90,7 @@ namespace FlowerAPI.Controllers
             }
         }
 
+        /*
         [HttpPut]
         public async Task<ActionResult> UpdateCostumer([FromQuery] int id, [FromBody] CostumersDTO updateCostumersDTO)
         {
@@ -143,6 +144,6 @@ namespace FlowerAPI.Controllers
                 var realmessage = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
                 return BadRequest(realmessage);
             }
-        }
+        }*/
     }
 }
