@@ -1,3 +1,7 @@
+// ==========================================================================
+// ADATBÁZIS KACSOLATI FÁJL (UI kezelése, Kattintások, Kirajzolások)
+// ==========================================================================
+
 async function Login(username, password)
 {
     try
@@ -142,7 +146,7 @@ async function RegisterNewPineBatchOrder(pine_type, batch_state, quantity)
     }
 }
 
-async function getPineBaseTypes() 
+async function GetPineBaseTypes() 
 {
     const response = await fetch("https://localhost:7095/Pinebasetype");
 

@@ -280,7 +280,7 @@ async function loadPineBaseTypes()
 {
     try
     {
-        const pineBasetypes = await getPineBaseTypes();
+        const pineBasetypes = await GetPineBaseTypes();
         console.log(pineBasetypes);
 
         const dropdown = document.getElementById("base_type_dropdown");
